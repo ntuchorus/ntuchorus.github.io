@@ -32,7 +32,7 @@
 
 ### ntuchorus.org
 `ntuchorus.org`  `ntuchoir.com` `ntuchorus.me` 這些域名都大概一年 300 ~ 400 塊台幣。
-請參考 NameCheap[https://www.namecheap.com/domains/registration/results.aspx?domain=ntuchorus.org] 所有選擇。
+請參考 [NameCheap](https://www.namecheap.com/domains/registration/results.aspx?domain=ntuchorus.org) 所有選擇。
 域名提供商通常會給第一年優惠價格，所以我們必須決定自己想要租這個域名租多久。
 像是 [goDaddy](https://www.godaddy.com/domains/searchresults.aspx?ci=83269&checkAvail=1&domainToCheck=ntuchorus&isc=cjc99com) 提供 `ntuchoir.com` 第一年 99 台幣，第二年 279 台幣這種優惠，`ntuchorus.org` 也是可以有每年 259 台幣這種價格。
 
