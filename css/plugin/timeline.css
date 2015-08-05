@@ -1,0 +1,344 @@
+/* line 2, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered img {
+  vertical-align: middle;
+}
+
+/* line 6, ../../_includes/stylesheets/plugin/timeline.scss */
+.img-responsive {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+/* line 12, ../../_includes/stylesheets/plugin/timeline.scss */
+.img-rounded {
+  border-radius: 3px;
+}
+
+/* line 16, ../../_includes/stylesheets/plugin/timeline.scss */
+.img-circle {
+  border-radius: 50%;
+}
+
+/* line 20, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* line 25, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered:before, .timeline-centered:after {
+  content: " ";
+  display: table;
+}
+
+/* line 30, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered:after {
+  clear: both;
+}
+
+/* line 34, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered:before, .timeline-centered:after {
+  content: " ";
+  display: table;
+}
+
+/* line 39, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered:after {
+  clear: both;
+}
+
+/* line 43, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 4px;
+  background: #f5f5f6;
+  left: 50%;
+  top: 20px;
+  bottom: 20px;
+  margin-left: -4px;
+}
+
+/* line 55, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry {
+  position: relative;
+  width: 50%;
+  float: right;
+  margin-bottom: 70px;
+  clear: both;
+}
+
+/* line 63, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry:before, .timeline-centered .timeline-entry:after {
+  content: " ";
+  display: table;
+}
+
+/* line 68, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry:after {
+  clear: both;
+}
+
+/* line 72, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry:before, .timeline-centered .timeline-entry:after {
+  content: " ";
+  display: table;
+}
+
+/* line 77, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry:after {
+  clear: both;
+}
+
+/* line 81, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.begin {
+  margin-bottom: 0;
+}
+
+/* line 85, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.left-aligned {
+  float: left;
+}
+
+/* line 89, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.left-aligned .timeline-entry-inner {
+  margin-left: 0;
+  margin-right: -18px;
+}
+
+/* line 94, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-time {
+  left: auto;
+  right: -100px;
+  text-align: left;
+}
+
+/* line 100, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-icon {
+  float: right;
+}
+
+/* line 104, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-label {
+  margin-left: 0;
+  margin-right: 70px;
+}
+
+/* line 109, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-label:after {
+  left: auto;
+  right: 0;
+  margin-left: 0;
+  margin-right: -9px;
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/* line 121, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner {
+  position: relative;
+  margin-left: -22px;
+}
+
+/* line 126, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner:before, .timeline-centered .timeline-entry .timeline-entry-inner:after {
+  content: " ";
+  display: table;
+}
+
+/* line 131, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner:after {
+  clear: both;
+}
+
+/* line 135, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner:before, .timeline-centered .timeline-entry .timeline-entry-inner:after {
+  content: " ";
+  display: table;
+}
+
+/* line 140, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner:after {
+  clear: both;
+}
+
+/* line 144, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-time {
+  position: absolute;
+  left: -100px;
+  text-align: right;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 154, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-time > span {
+  display: block;
+}
+
+/* line 158, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-time > span:first-child {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* line 163, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-time > span:last-child {
+  font-size: 12px;
+}
+
+/* line 167, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon {
+  background: #fff;
+  color: #737881;
+  display: block;
+  width: 40px;
+  height: 40px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-align: center;
+  -moz-box-shadow: 0 0 0 5px #f5f5f6;
+  -webkit-box-shadow: 0 0 0 5px #f5f5f6;
+  box-shadow: 0 0 0 5px #f5f5f6;
+  line-height: 40px;
+  font-size: 15px;
+  float: left;
+}
+
+/* line 188, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-primary {
+  background-color: #303641;
+  color: #fff;
+}
+
+/* line 193, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-secondary {
+  background-color: #ee4749;
+  color: #fff;
+}
+
+/* line 198, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-success {
+  background-color: #00a651;
+  color: #fff;
+}
+
+/* line 203, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-info {
+  background-color: #21a9e1;
+  color: #fff;
+}
+
+/* line 208, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-warning {
+  background-color: #fad839;
+  color: #fff;
+}
+
+/* line 213, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-danger {
+  background-color: #cc2424;
+  color: #fff;
+}
+
+/* line 218, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label {
+  position: relative;
+  background: #f5f5f6;
+  padding: 1.7em;
+  margin-left: 70px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 231, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 9px 9px 9px 0;
+  border-color: transparent #f5f5f6 transparent transparent;
+  left: 0;
+  top: 10px;
+  margin-left: -9px;
+}
+
+/* line 245, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2, .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label p {
+  color: #737881;
+  font-family: "Noto Sans",sans-serif;
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.428571429;
+}
+
+/* line 253, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label p + p {
+  margin-top: 15px;
+}
+
+/* line 257, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* line 262, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 a {
+  color: #303641;
+}
+
+/* line 266, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 span {
+  -webkit-opacity: .6;
+  -moz-opacity: .6;
+  opacity: .6;
+  -ms-filter: alpha(opacity=60);
+  filter: alpha(opacity=60);
+}
+
+/* line 274, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered {
+  cursor: pointer;
+}
+
+/* line 278, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered a {
+  text-decoration: none;
+}
+
+/* line 282, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered img {
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  transition: all .2s ease-in-out;
+}
+
+/* line 288, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered img:hover {
+  transform: scale(1.05);
+}
+
+/* line 291, ../../_includes/stylesheets/plugin/timeline.scss */
+.timeline-centered blockquote {
+  display: none;
+}

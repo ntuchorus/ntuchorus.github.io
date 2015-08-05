@@ -1,0 +1,121 @@
+/* line 3, ../../_includes/stylesheets/plugin/carousel-team.scss */
+.carousel-control {
+  width: 4%;
+  transition: all .2s ease-in-out;
+}
+
+/* line 7, ../../_includes/stylesheets/plugin/carousel-team.scss */
+.carousel-control:hover {
+  transform: scale(1.1);
+}
+
+/* line 10, ../../_includes/stylesheets/plugin/carousel-team.scss */
+.carousel-control.left {
+  left: -5%;
+}
+
+/* line 13, ../../_includes/stylesheets/plugin/carousel-team.scss */
+.carousel-control.right {
+  right: -5%;
+}
+
+/* line 16, ../../_includes/stylesheets/plugin/carousel-team.scss */
+.carousel-control.left, .carousel-control.right {
+  background-image: none;
+  position: absolute;
+  top: 50%;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+  height: 50%;
+}
+
+@media (max-width: 767px) {
+  /* line 28, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .active.left {
+    left: -100%;
+  }
+
+  /* line 29, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .next {
+    left: 100%;
+  }
+
+  /* line 30, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .prev {
+    left: -100%;
+  }
+
+  /* line 31, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .active > div {
+    display: none;
+  }
+
+  /* line 32, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .active > div:first-child {
+    display: block;
+  }
+}
+@media (min-width: 767px) and (max-width: 992px) {
+  /* line 36, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .active.left {
+    left: -50%;
+  }
+
+  /* line 37, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .next {
+    left: 50%;
+  }
+
+  /* line 38, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .prev {
+    left: -50%;
+  }
+
+  /* line 39, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .active > div {
+    display: none;
+  }
+
+  /* line 40, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .active > div:first-child {
+    display: block;
+  }
+
+  /* line 41, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .active > div:first-child + div {
+    display: block;
+  }
+}
+@media (min-width: 992px) {
+  /* line 44, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .active.left {
+    left: -25%;
+  }
+
+  /* line 45, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .next {
+    left: 25%;
+  }
+
+  /* line 46, ../../_includes/stylesheets/plugin/carousel-team.scss */
+  #carousel-team > .carousel-inner .prev {
+    left: -25%;
+  }
+}
+/* line 49, ../../_includes/stylesheets/plugin/carousel-team.scss */
+#carousel-team .thumbnail {
+  text-align: center;
+}
+
+/* line 53, ../../_includes/stylesheets/plugin/carousel-team.scss */
+#carousel-team img {
+  border: 6px solid #333333;
+  border-radius: 4px;
+  margin: 10px auto;
+}
+
+/* line 59, ../../_includes/stylesheets/plugin/carousel-team.scss */
+#carousel-team .thumbnail h4 {
+  color: #555555;
+}

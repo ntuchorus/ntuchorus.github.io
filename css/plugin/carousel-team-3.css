@@ -1,0 +1,122 @@
+/* Global */
+/* line 4, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+img {
+  max-width: 100%;
+}
+
+/* line 8, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+a {
+  -webkit-transition: all 150ms ease;
+  -moz-transition: all 150ms ease;
+  -ms-transition: all 150ms ease;
+  -o-transition: all 150ms ease;
+  transition: all 150ms ease;
+}
+
+/* line 15, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+a:hover {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  /* IE 8 */
+  filter: alpha(opacity=50);
+  /* IE7 */
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+/* line 24, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+body {
+  border-top: 0;
+  background: #c4e17f;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+/* line 25, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.thumbnails li > .fff .caption {
+  background: #fff !important;
+  padding: 10px;
+}
+
+/* Page Header */
+/* line 27, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.page-header {
+  background: #f9f9f9;
+  margin: -30px -40px 40px;
+  padding: 20px 40px;
+  border-top: 4px solid #ccc;
+  color: #999;
+  text-transform: uppercase;
+}
+
+/* line 35, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.page-header h3 {
+  line-height: 0.88rem;
+  color: #000;
+}
+
+/* Thumbnail Box */
+/* line 43, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.caption h4 {
+  color: #444;
+}
+
+/* line 47, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.caption p {
+  color: #999;
+}
+
+/* Carousel Control */
+/* line 57, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.control-box {
+  text-align: right;
+  width: 100%;
+}
+
+/* line 61, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+.carousel-control {
+  background: #666;
+  border: 0px;
+  border-radius: 0px;
+  display: inline-block;
+  font-size: 34px;
+  font-weight: 200;
+  line-height: 18px;
+  opacity: 0.5;
+  padding: 4px 10px 0px;
+  position: static;
+  height: 30px;
+  width: 15px;
+}
+
+/* Mobile Only */
+@media (max-width: 767px) {
+  /* line 82, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+  .page-header, .control-box {
+    text-align: center;
+  }
+}
+@media (max-width: 479px) {
+  /* line 87, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+  .caption {
+    word-break: break-all;
+  }
+}
+/* line 93, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+li {
+  list-style-type: none;
+}
+
+/* line 95, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+::selection {
+  background: #ff5e99;
+  color: #FFFFFF;
+  text-shadow: 0;
+}
+
+/* line 96, ../../_includes/stylesheets/plugin/carousel-team-3.scss */
+::-moz-selection {
+  background: #ff5e99;
+  color: #FFFFFF;
+}
