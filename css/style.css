@@ -9545,19 +9545,20 @@ body {
   color: #288ad6;
 }
 
-/* line 8, ../_includes/stylesheets/_custom.scss */
-body {
-  overflow-x: hidden;
+/* line 9, ../_includes/stylesheets/_custom.scss */
+body, html {
+  width: auto !important;
+  overflow-x: hidden !important;
   color: #333;
   letter-spacing: 1.5px;
 }
 
-/* line 14, ../_includes/stylesheets/_custom.scss */
+/* line 16, ../_includes/stylesheets/_custom.scss */
 #performance-content {
   position: relative;
 }
 
-/* line 17, ../_includes/stylesheets/_custom.scss */
+/* line 19, ../_includes/stylesheets/_custom.scss */
 #performance-info {
   float: none;
   margin: 0 auto;
@@ -9567,37 +9568,37 @@ body {
   line-height: 35px;
 }
 
-/* line 26, ../_includes/stylesheets/_custom.scss */
+/* line 28, ../_includes/stylesheets/_custom.scss */
 #performance-title {
   font-size: 55px;
 }
 
-/* line 31, ../_includes/stylesheets/_custom.scss */
+/* line 33, ../_includes/stylesheets/_custom.scss */
 #map_label {
   display: inline;
 }
 
-/* line 34, ../_includes/stylesheets/_custom.scss */
+/* line 36, ../_includes/stylesheets/_custom.scss */
 #order_ticket {
   margin-top: 20px;
 }
 
-/* line 38, ../_includes/stylesheets/_custom.scss */
+/* line 40, ../_includes/stylesheets/_custom.scss */
 #performance-logo {
   visibility: hidden;
 }
 
-/* line 42, ../_includes/stylesheets/_custom.scss */
+/* line 44, ../_includes/stylesheets/_custom.scss */
 .timeline > li .timeline-image {
   height: auto;
 }
 
-/* line 46, ../_includes/stylesheets/_custom.scss */
+/* line 48, ../_includes/stylesheets/_custom.scss */
 .timeline-inverted .timeline-time {
   right: 1%;
 }
 
-/* line 50, ../_includes/stylesheets/_custom.scss */
+/* line 52, ../_includes/stylesheets/_custom.scss */
 .timeline-time {
   position: absolute;
   right: 0;
@@ -9605,31 +9606,31 @@ body {
   text-align: right;
 }
 
-/* line 56, ../_includes/stylesheets/_custom.scss */
+/* line 58, ../_includes/stylesheets/_custom.scss */
 .timeline-year {
   font-weight: bold;
   display: block;
 }
 
-/* line 61, ../_includes/stylesheets/_custom.scss */
+/* line 63, ../_includes/stylesheets/_custom.scss */
 .timeline-date {
   display: block;
 }
 
-/* line 65, ../_includes/stylesheets/_custom.scss */
+/* line 67, ../_includes/stylesheets/_custom.scss */
 .timeline h4 {
   height: 22px;
 }
 
 @media (min-width: 768px) {
-  /* line 70, ../_includes/stylesheets/_custom.scss */
+  /* line 72, ../_includes/stylesheets/_custom.scss */
   .timeline-inverted .timeline-time {
     left: 30%;
     right: auto;
     text-align: right;
   }
 
-  /* line 75, ../_includes/stylesheets/_custom.scss */
+  /* line 77, ../_includes/stylesheets/_custom.scss */
   .timeline-time {
     top: 0;
     right: 30%;
@@ -9637,19 +9638,19 @@ body {
   }
 }
 @media (min-width: 1200px) {
-  /* line 83, ../_includes/stylesheets/_custom.scss */
+  /* line 85, ../_includes/stylesheets/_custom.scss */
   .timeline-inverted .timeline-time {
     left: 30%;
     text-align: right;
   }
 
-  /* line 89, ../_includes/stylesheets/_custom.scss */
+  /* line 91, ../_includes/stylesheets/_custom.scss */
   .timeline-time {
     top: 30%;
     text-align: left;
   }
 
-  /* line 94, ../_includes/stylesheets/_custom.scss */
+  /* line 96, ../_includes/stylesheets/_custom.scss */
   #performance-logo {
     max-width: 100%;
     max-height: 100%;
