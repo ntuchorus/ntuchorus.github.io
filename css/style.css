@@ -9558,7 +9558,12 @@ body, html {
   position: relative;
 }
 
-/* line 19, ../_includes/stylesheets/_custom.scss */
+/* line 20, ../_includes/stylesheets/_custom.scss */
+#performance-content > div {
+  z-index: 1;
+}
+
+/* line 23, ../_includes/stylesheets/_custom.scss */
 #performance-info {
   float: none;
   margin: 0 auto;
@@ -9568,37 +9573,37 @@ body, html {
   line-height: 35px;
 }
 
-/* line 28, ../_includes/stylesheets/_custom.scss */
+/* line 32, ../_includes/stylesheets/_custom.scss */
 #performance-title {
   font-size: 55px;
 }
 
-/* line 33, ../_includes/stylesheets/_custom.scss */
+/* line 37, ../_includes/stylesheets/_custom.scss */
 #map_label {
   display: inline;
 }
 
-/* line 36, ../_includes/stylesheets/_custom.scss */
+/* line 40, ../_includes/stylesheets/_custom.scss */
 #order_ticket {
   margin-top: 20px;
 }
 
-/* line 40, ../_includes/stylesheets/_custom.scss */
+/* line 44, ../_includes/stylesheets/_custom.scss */
 #performance-logo {
   visibility: hidden;
 }
 
-/* line 44, ../_includes/stylesheets/_custom.scss */
+/* line 48, ../_includes/stylesheets/_custom.scss */
 .timeline > li .timeline-image {
   height: auto;
 }
 
-/* line 48, ../_includes/stylesheets/_custom.scss */
+/* line 52, ../_includes/stylesheets/_custom.scss */
 .timeline-inverted .timeline-time {
   right: 1%;
 }
 
-/* line 52, ../_includes/stylesheets/_custom.scss */
+/* line 56, ../_includes/stylesheets/_custom.scss */
 .timeline-time {
   position: absolute;
   right: 0;
@@ -9606,31 +9611,31 @@ body, html {
   text-align: right;
 }
 
-/* line 58, ../_includes/stylesheets/_custom.scss */
+/* line 62, ../_includes/stylesheets/_custom.scss */
 .timeline-year {
   font-weight: bold;
   display: block;
 }
 
-/* line 63, ../_includes/stylesheets/_custom.scss */
+/* line 67, ../_includes/stylesheets/_custom.scss */
 .timeline-date {
   display: block;
 }
 
-/* line 67, ../_includes/stylesheets/_custom.scss */
+/* line 71, ../_includes/stylesheets/_custom.scss */
 .timeline h4 {
   height: 22px;
 }
 
 @media (min-width: 768px) {
-  /* line 72, ../_includes/stylesheets/_custom.scss */
+  /* line 76, ../_includes/stylesheets/_custom.scss */
   .timeline-inverted .timeline-time {
     left: 30%;
     right: auto;
     text-align: right;
   }
 
-  /* line 77, ../_includes/stylesheets/_custom.scss */
+  /* line 81, ../_includes/stylesheets/_custom.scss */
   .timeline-time {
     top: 0;
     right: 30%;
@@ -9638,19 +9643,19 @@ body, html {
   }
 }
 @media (min-width: 1200px) {
-  /* line 85, ../_includes/stylesheets/_custom.scss */
+  /* line 89, ../_includes/stylesheets/_custom.scss */
   .timeline-inverted .timeline-time {
     left: 30%;
     text-align: right;
   }
 
-  /* line 91, ../_includes/stylesheets/_custom.scss */
+  /* line 95, ../_includes/stylesheets/_custom.scss */
   .timeline-time {
     top: 30%;
     text-align: left;
   }
 
-  /* line 96, ../_includes/stylesheets/_custom.scss */
+  /* line 100, ../_includes/stylesheets/_custom.scss */
   #performance-logo {
     max-width: 100%;
     max-height: 100%;
