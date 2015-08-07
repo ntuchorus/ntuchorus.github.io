@@ -4,7 +4,7 @@
 請看目前網站的樣子：[ntuchorus.github.io](http://ntuchorus.github.io/)
 
 
-**請大家集思廣益，到這邊把裡對[這個地方](https://docs.google.com/document/d/1qbRFDU8B2ahNHr89VihLP8su0hXfAu1umXDV8vMl_8o/edit#)的想法全部寫下來，謝謝！**
+**請大家集思廣益，到[這個地方](https://docs.google.com/document/d/1qbRFDU8B2ahNHr89VihLP8su0hXfAu1umXDV8vMl_8o/edit#)把想法全部寫下來，謝謝！**
 
 
 ## 現況
