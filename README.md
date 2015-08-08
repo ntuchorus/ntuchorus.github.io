@@ -7,6 +7,9 @@
 **請大家集思廣益，到[這個地方](https://docs.google.com/document/d/1qbRFDU8B2ahNHr89VihLP8su0hXfAu1umXDV8vMl_8o/edit#)把想法全部寫下來，謝謝！**
 
 
+對技術開發有興趣的話，請到[這個地方](https://github.com/ntuchorus/ntuchorus)
+
+
 ## 現況
 
 - 我們有一個粉絲專頁，上面可以放宣傳文宣（招生、公演倒數照、活動）
