@@ -1,10 +1,14 @@
 
 # 台大合唱團網站提案
 
+
 請看目前網站的樣子：[ntuchorus.github.io](http://ntuchorus.github.io/)
 
+**(目前的樣子不一定是以後的樣子，如果希望這個網站可以傳承個兩三年，我們就需要好好思考什麼樣子最能代表台大合唱團
+台大合唱團的代表色是什麼？logo長什麼樣子？們要在哪個位置放倒數照？在哪個位置放招生宣傳？我們要怎麼呈現我們最棒的影片？）**
 
 **請大家集思廣益，到[這個地方](https://docs.google.com/document/d/1qbRFDU8B2ahNHr89VihLP8su0hXfAu1umXDV8vMl_8o/edit#)把想法全部寫下來，謝謝！**
+
 
 
 對技術開發有興趣的話，請到[這個地方](https://github.com/ntuchorus/ntuchorus)
