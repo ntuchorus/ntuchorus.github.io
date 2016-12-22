@@ -100,7 +100,6 @@ $(document).ready(function(){
                           JSON.stringify(dataset),
                           'request',
                           function(data){
-                              alert(JSON.stringify(data));
                 if(data[0]["status"] == "0"){
                     $('#update_date').html('更新時間：' + data[1]['time'] + '　　　瀏覽次數：' + data[1]['counter']);
                     $('#update_message').html(data[1]['message']);
