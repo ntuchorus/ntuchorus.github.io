@@ -116,18 +116,17 @@ $(document).ready(function(){
                         arr['preserve'] = parseInt(data[i]['preserve']);
                         ticketTable[seat_id] = arr;
                         if(seat_preserve > 0)
-                            $(seat_id).addClass('seat_type_6');
+                            $('#' + seat_id).addClass('seat_type_6');
                         else if(seat_state == 2)
-                            $(seat_id).addClass('seat_type_5');
+                            $('#' + seat_id).addClass('seat_type_5');
                         else if(seat_state == 1)
-                            $(seat_id).addClass('seat_type_4');
+                            $('#' + seat_id).addClass('seat_type_4');
                         else{
                             if(seat_type >= 4)
-                                $(seat_id).addClass('seat_type_6');
+                                $('#' + seat_id).addClass('seat_type_6');
                             else
-                                $(seat_id).addClass('seat_type_' + seat_type);
+                                $('#' + seat_id).addClass('seat_type_' + seat_type);
                         }
-                        updateSeat(seat_id);
                     }
                     $('#message').show();
                     $('#floor_4').show();
