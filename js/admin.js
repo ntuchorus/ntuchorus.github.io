@@ -104,6 +104,18 @@ $(document).ready(function(){
                     $('#update_date').html('更新時間：' + data[1]['time'] + '　　　瀏覽次數：' + data[1]['counter']);
                     $('#update_message').html(data[1]['message']);
                     $('#requesting').hide();
+
+                    var statistic_cnt_total = 0, statistic_cnt_sale = 0;
+                    for(var i = 0; i < 4; i++){
+                        var rate = (parseInt(data[2][i]['sale']) / parseInt(data[2][i]['total']) * 100).toFixed(1);
+                        statistic_cnt_total += parseInt(data[2][i]['total']);
+                        statistic_cnt_sale += parseInt(data[2][i]['sale']);
+                        $('#statistic_label_' + data[2][i]['type']).html(data[2][i]['price'] + '元：' + rate + '%');
+                        $('#statistic_bar_progress_' + data[2][i]['type']).css('width', (rate * 1.7).toFixed());
+                    }
+                    $('#statistic_label_total').html("總計：" + (statistic_cnt_sale / statistic_cnt_total * 100).toFixed(1) + '%');
+                    $('#statistic_bar_progress_total').css('width', (statistic_cnt_sale / statistic_cnt_total * 170).toFixed());
+
                     for(var i = 2; i < data.length; i++){
                         var seat_id = 'seat_' + data[i]['floor'] + '_' + data[i]['row'] + '_' + data[i]['seat'];
                         var seat_state = parseInt(data[i]['state']);
@@ -132,6 +144,7 @@ $(document).ready(function(){
                     $('#floor_4').show();
                     $('#floor_3').show();
                     $('#floor_2').show();
+                    $('#statistic').show();
                     $('#form').show();
                 }
                 else if(data[0]["status"] == '1'){
