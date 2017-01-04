@@ -19,6 +19,8 @@ $(document).ready(function(){
             }
             $('#statistic_label_total').html("總計：" + (statistic_cnt_sale / statistic_cnt_total * 100).toFixed(1) + '%');
             $('#statistic_bar_progress_total').css('width', (statistic_cnt_sale / statistic_cnt_total * 170).toFixed());
+            $('#statistic_label_DM').html("DM發送量： [" + data[2][5]['sale'] + ' / ' + data[2][5]['total'] + '] ' + (data[2][5]['sale'] / data[2][5]['total'] * 100).toFixed(1) + '%');
+            $('#statistic_bar_progress_DM').css('width', (statistic_cnt_sale / statistic_cnt_total * 950).toFixed());
 
             for(var i = 3; i < data.length; i++){
                 var seat_id = '#seat_' + data[i]['floor'] + '_' + data[i]['row'] + '_' + data[i]['seat'];
