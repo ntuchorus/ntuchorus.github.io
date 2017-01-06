@@ -1,6 +1,6 @@
 var ticketTable = {};
 var editTicketTable = {};
-
+var priceSelected = 0;
 
 function updateSeat(id) {
     var finalState = ticketTable[id]['state'];
@@ -26,13 +26,21 @@ function updateSeat(id) {
 
 function select(a) {
     var click_id = a.attr('id');
+    var click_price = ticketTable[click_id]['price'];
+    if(ticketTable[click_id]['type'] < 3)
+        click_price *= 0.9;
     if(ticketTable[click_id]['type'] < 4 && ticketTable[click_id]['preserve'] == 0){
-        if(click_id in editTicketTable)
+        if(click_id in editTicketTable){
             delete editTicketTable[click_id];
-        else
+            priceSelected -= click_price;
+        }
+        else{
             editTicketTable[click_id] = 1;
+            priceSelected += click_price;
+        }
         updateSeat(click_id);
     }
+    $('#form_label').html('選取總金額：' + priceSelected + '元');
 }
 
 function commitData(mode){
@@ -91,6 +99,7 @@ $(document).ready(function(){
                         arr['state'] = parseInt(data[i]['state']);
                         arr['type'] = parseInt(data[i]['type']);
                         arr['preserve'] = parseInt(data[i]['preserve']);
+                        arr['price'] = parseInt(data[i]['price']);
                         ticketTable[seat_id] = arr;
                         if(seat_preserve > 0)
                             $('#' + seat_id).addClass('seat_type_6');
