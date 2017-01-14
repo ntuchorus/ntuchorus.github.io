@@ -89,7 +89,7 @@ $(document).ready(function(){
                     $('#statistic_label_total').html("總計：" + (statistic_cnt_sale / statistic_cnt_total * 100).toFixed(1) + '%');
                     $('#statistic_bar_progress_total').css('width', (statistic_cnt_sale / statistic_cnt_total * 170).toFixed());
 
-                    for(var i = 2; i < data.length; i++){
+                    for(var i = 4; i < data.length; i++){
                         var seat_id = 'seat_' + data[i]['floor'] + '_' + data[i]['row'] + '_' + data[i]['seat'];
                         var seat_state = parseInt(data[i]['state']);
                         var seat_type = parseInt(data[i]['type']);

@@ -1,5 +1,7 @@
 $(document).ready(function(){
     var dataset = {'id': 'guest'};
+    $('#requesting').html('電子票圖資料庫維護，預計下午18:00開啟服務');
+    /*
     connectServer('POST',
                   JSON.stringify(dataset),
                   'request',
@@ -53,4 +55,5 @@ $(document).ready(function(){
             $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
         }
     });
+    */
 });
