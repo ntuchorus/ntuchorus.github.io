@@ -78,7 +78,7 @@ $(document).ready(function(){
                     $('#update_message').html(data['message']['message']);
                     $('#requesting').hide();
 
-                    var statistic_sale = [0, 0, 0, 0, 0], statistic_total = [0, 0, 0, 0, 0], statistic_price = [400, 600, 800, 1200];
+                    var statistic_sale = [0, 0, 0, 0, 0], statistic_total = [0, 0, 0, 0, 0], statistic_price = [400, 700, 1000, 1500];
                     for(var i = 0; i < data['statistics'].length; i++){
                         statistic_total[data['statistics'][i]['type']] += parseInt(data['statistics'][i]['num']);
                         statistic_total[4] += parseInt(data['statistics'][i]['num']);
