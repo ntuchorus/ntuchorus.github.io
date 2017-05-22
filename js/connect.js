@@ -4,7 +4,7 @@ function connectServer(type, dataset, server, callback){
         data: dataset,
         contentType: 'application/json',
         dataType: 'json',
-        url: "http://140.112.28.131:3001/" + server,
+        url: "http://ntuchorus.herokuapp.com/" + server,
         success: function(data){
         	callback(data);
         },
