@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>台大合唱團公演票圖--系統首頁</title>
+        <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+        <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+        <script type="text/javascript" src="js/connect.js"></script>
+        <script type="text/javascript" src="js/fblogin.js"></script>
+        <script type="text/javascript" src="js/root.js"></script>
+        <link href="css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="css/list.css" rel="stylesheet" type="text/css" />
+        <link href="css/typeset.css" rel="stylesheet" type="text/css" />
+        <link href="css/root.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <!-- Top Menu -->
+        <div id="menu">
+            <div id="menuinner">
+                <ul>
+                    <li><a class="menubutton" id="menubutton_1_on" href="index.html">首頁</a></li>
+                    <li><a class="menubutton" id="menubutton_2" href="ticketoutline.html">電子票圖</a></li>
+                    <li><a class="menubutton" id="menubutton_3" href="ticketsetting.html">整票系統</a></li>
+                    <li><a class="menubutton" id="menubutton_4" href="ticketdraw.html">劃票系統</a></li>
+                    <li><a class="menubutton" id="menubutton_5" href="ticketsale.html">售票登記</a></li>
+                    <li><a class="menubutton" id="menubutton_6" href="ticketedit.html">訂單編輯</a></li>
+                    <li><a class="menubutton" id="menubutton_7" href="ticketmap.html">售票地圖</a></li>
+                    <li><a class="menubutton" id="menubutton_8" href="statistics.html">統計報表</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id='content'>
+            <div class='floor' id='requesting'>
+                正在讀取票圖資訊......
+            </div>
+            <div class='floor' id='attribute'>
+                <div class='floor_label'>公告訊息</div>
+                <div class='list_label' id='attribute_message'>
+                    <div class='entry_label'>設定公告：</div><input type="text" id="input_message" name="form_message" />
+                </div>
+                <div class='list_label' id='attribute_DM'>
+                    <div class='entry_label'>DM發放數量：</div><input type="text" id="input_DM_given" name="form_DM_given" onkeyup="return inputValidNumber($(this), value)"/>
+                    <div class='entry_label'>DM總計數量：</div><input type="text" id="input_DM_total" name="form_DM_total" onkeyup="return inputValidNumber($(this), value)"/>
+                </div>
+                <div class='list_label' id='attribute_program'>
+                    <div class='entry_label'>節目冊售出：</div><input type="text" id="input_program_sale" name="form_program_sale" onkeyup="return inputValidNumber($(this), value)"/>
+                    <div class='entry_label'>折價券送出：</div><input type="text" id="input_program_coupon" name="form_program_coupon" onkeyup="return inputValidNumber($(this), value)"/>
+                </div>
+                <div id="attribute_submit"><a id='submit_attribute' href='#'>送出</a></div>
+            </div>
+
+            <div class='floor' id='setting'>
+                <div class='floor_label'>選項設定</div>
+                <div class='list_label' id='setting_currentdata'>
+                    <div class='entry_label'>目前場次設定：</div><select id='select_setting_currentdata'></select>
+                </div>
+                <div class='list_label' id='setting_isshowhidden'>
+                     <label><input type="checkbox" id="input_setting_isshowhidden" name="form_setting_isshowhidden" />公開座位圖顯示老人、友團票區</label>
+                </div>
+                <div id="container_setting_form">
+                    <div id="setting_createprogram"><a id='submit_createprogram' target='_blank' href='createprogram.html'>建立新場次</a></div>
+                    <div id="setting_submit"><a id='submit_setting' href='#'>送出</a></div>
+                </div>
+            </div>
+
+            <div class='floor' id='manager'>
+                <div class='floor_label'>權限設定</div>
+                <div class="list_head" id="manager_label">
+                    <div class="entry_manager_fb">FB連結</div>
+                    <div class="entry_manager_name">姓名</div>
+                    <div class="entry_manager_permission">權限</div>
+                </div>
+                <div id="manager_data"></div>
+                <div id="manager_submit"><a id='submit_manager' href='#'>送出</a></div>
+            </div>
+        </div>
+    </body>
+</html>

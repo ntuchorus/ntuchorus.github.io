@@ -1,0 +1,14 @@
+/* List Entry */
+.list_entry, .list_head {
+    clear: both;
+    margin: 0 auto;
+    border-bottom: 1px solid;
+    border-color: #999999;
+}
+.list_label {
+    clear: both;
+    margin: 0 auto;
+}
+.list_entry:hover { background: #e3e3e3; }
+
+

@@ -1,0 +1,119 @@
+
+#attribute, #setting, #manager {
+    display: none;
+}
+
+
+/* Form */
+input, select {
+    float: left;
+    font-family: "Calibri", "Heiti TC", "微軟正黑體";
+    border: none;
+    font-size: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #FFFFFF;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+a[id^=submit] {
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    color: #3B3B3B;
+    background: #e0e0e0;
+}
+a[id^=submit]:hover {
+    background: #cccccc;
+}
+#manager_submit, #attribute_submit, #setting_submit, #setting_createprogram {
+    padding-top: 10px;
+    margin: 0 auto;
+    height: 25px;
+    line-height: 25px;
+}
+#manager_submit, #attribute_submit, #setting_submit,
+#submit_attribute, #submit_manager, #submit_setting { width: 60px; }
+#setting_createprogram, #submit_createprogram { width: 100px; }
+
+
+/* Attribute */
+.entry_label {
+    float: left;
+    text-align: left;
+    color: #3B3B3B;
+    width: 130px;
+    height: 25px;
+    line-height: 25px;
+}
+.list_label {
+    margin: 0 auto;
+    width: 750px;
+}
+#input_message {
+    width: 600px;
+}
+#input_DM_given, #input_DM_total, #input_program_sale, #input_program_coupon {
+    width: 80px;
+}
+#input_DM_given, #input_program_sale {
+    margin-right: 80px;
+}
+#attribute input {
+    height: 25px;
+    line-height: 25px;
+}
+#setting_submit, #setting_createprogram {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#container_setting_form {
+    width: 200px;
+    height: 35px;
+    margin: 0 auto;
+}
+
+/* Setting */
+#setting input, #setting select {
+    height: 25px;
+    line-height: 25px;
+}
+#select_setting_currentdata {
+    width: 300px;
+}
+#setting_isshowhidden label{
+    margin-right: 500px;
+}
+#input_setting_isshowhidden {
+    appearance: checkbox;
+    -moz-appearance: checkbox;
+    -webkit-appearance: checkbox;
+}
+
+
+
+/* Permission */
+.list_head, .list_entry, .list_label {
+    height: 30px;
+    line-height: 30px;
+}
+.entry_manager_fb, .entry_manager_name, .entry_manager_permission {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+#manager_label, .manager_data_entry { width: 550px; }
+.entry_manager_fb { width: 150px; }
+.entry_manager_name { width: 250px; }
+.entry_manager_permission { width: 150px; }
+.entry_manager_fb a { color:#0e3c87;}
+.entry_manager_name input, .entry_manager_permission select{
+    margin: 3px 10px 3px 10px;
+    height: 24px;
+    line-height: 24px;
+}
+.entry_manager_name input { width: 230px; }
+.entry_manager_permission select { width: 130px; }
+

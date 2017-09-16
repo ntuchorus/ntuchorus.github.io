@@ -1,0 +1,132 @@
+/* Visibility Init */
+#message, #floor_4, #floor_3, #floor_2, #statistic {
+    display: none;
+}
+
+/* Floor */
+#container_4 {
+    margin: 0 auto;
+    width: 954px;
+    height: 336px;
+}
+#container_3 {
+    margin: 0 auto;
+    width: 954px;
+    height: 320px;
+}
+#container_2 {
+    margin: 0 auto;
+    width: 882px;
+    height: 512px;
+}
+.container_graph {
+    padding-top: 15px;
+    margin: 0 auto;
+    width: 840px;
+    height: 25px;
+}
+#requesting {
+    font-size: 30px;
+    color: #404480;
+}
+#statistic {
+    height: 170px;
+}
+.container_statistic {
+    margin: 0 auto;
+    width: 950px;
+}
+
+/* Icons */
+div[class^=graphicon] {
+    display: block;
+    float: left;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+div[class^=graphlabel] {
+    display: block;
+    float: left;
+    text-align: left;
+    margin-left: 5px;
+    font-size: 18px;
+    width: 90px;
+    height: 25px;
+    line-height: 25px;
+    color: #4A4A4A;
+}
+.graphicon_1, .seat_type_0, #statistic_bar_0 {
+    background: #BAE89B;
+}
+.graphicon_2, .seat_type_1, #statistic_bar_1 {
+    background: #80AEED;
+}
+.graphicon_3, .seat_type_2, #statistic_bar_2 {
+    background: #E7EB73;
+}
+.graphicon_4, .seat_type_3, #statistic_bar_3 {
+    background: #EBB391;
+}
+.graphicon_5, .seat_type_4 {
+    background: #FF7575;
+}
+.graphicon_6, .seat_type_5 {
+    background: #8a8a8a;
+}
+.graphicon_7, .seat_type_6 {
+    background: #404040;
+}
+
+
+/* Statistics */
+.statistic_entry, .statistic_entry_full {
+    display: block;
+    float: left;
+    font-size: 20px;
+    width: 190px;
+    height: 60px;
+    line-height: 60px;
+    color: #4A4A4A;
+}
+.statistic_entry {
+    width: 190px;
+}
+.statistic_entry_full {
+    width: 950px;
+}
+.statistic_label {
+    height: 25px;
+    line-height: 25px;
+}
+.statistic_bar, .statistic_bar_full {
+    border-radius: 5px;
+    text-align: left;
+    height: 15px;
+    margin: 10px;
+    line-height: 15px;
+}
+.statistic_bar {
+    width: 170px;
+}
+.statistic_bar_full {
+    width: 930px;
+}
+.statistic_bar_progress {
+    border-radius: 5px;
+    text-align: left;
+    height: 15px;
+    line-height: 15px;
+}
+#statistic_bar_0 { background: #BAE89B; }
+#statistic_bar_1 { background: #80AEED; }
+#statistic_bar_2 { background: #E7EB73; }
+#statistic_bar_3 { background: #EBB391; }
+#statistic_bar_total { background: #C99BE8; }
+#statistic_bar_DM { background: #1bded5; }
+#statistic_bar_progress_0 { background: #64bb2a; }
+#statistic_bar_progress_1 { background: #1d64c9; }
+#statistic_bar_progress_2 { background: #adb319; }
+#statistic_bar_progress_3 { background: #c26024; }
+#statistic_bar_progress_total { background: #812abb; }
+#statistic_bar_progress_DM { background: #15aca5; }

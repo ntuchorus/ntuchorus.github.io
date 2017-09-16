@@ -1,0 +1,112 @@
+#inform_basic, #inform_price, #inform_manager, #inform_submit {
+    display: none;
+}
+h1 { margin-top: 30px; }
+
+/* Form */
+input, select {
+    float: left;
+    font-family: "Calibri", "Heiti TC", "微軟正黑體";
+    border: none;
+    font-size: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 24px;
+    line-height: 24px;
+    background: #FFFFFF;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    margin: 3px 0px 3px 0px;
+}
+a[id^=submit] {
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    color: #3B3B3B;
+    background: #e0e0e0;
+}
+a[id^=submit]:hover {
+    background: #cccccc;
+}
+select {
+}
+
+/* list */
+.list_label {
+    height: 30px;
+    line-height: 30px;
+}
+
+/* basic */
+.list_basic { width: 400px; }
+.label_basic {
+    float: left;
+    width: 120px;
+}
+.list_basic input, .list_basic select { float: left; }
+#input_basic_year { width: 100px; }
+#select_basic_season { 
+    width: 80px;
+    margin-left: 20px;
+}
+#input_basic_title, #select_basic_mapid { width: 200px; }
+
+/* manager */
+.list_manager { width: 920px; }
+.label_manager {
+    float: left;
+    width: 120px;
+}
+.entry_manager {
+    float: left;
+    width: 200px;
+}
+.entry_manager_label {
+    float: left;
+    width: 65px;
+}
+.entry_manager select{
+    width: 115px;
+}
+
+/* price */
+.list_price { width: 680px; }
+#list_label_program { width: 260; }
+.label_price {
+    float: left;
+    width: 120px;
+}
+.entry_price {
+    float: left;
+    width: 140px;
+}
+.entry_price_label {
+    float: left;
+    width: 30px;
+}
+.entry_price input{
+    width: 60px;
+}
+input[id^=input_price_type], input[id^=input_price_discount] {
+    margin-left: 40px;
+}
+.entry_price_type0 { color: #42910D; }
+.entry_price_type1 { color: #205EB3; }
+.entry_price_type2 { color: #777A09; }
+.entry_price_type3 { color: #A14A15; }
+
+/* submit */
+#entry_submit {
+    padding-top: 10px;
+    margin: 0 auto;
+    height: 25px;
+    line-height: 25px;
+    width: 60px;
+}
+#submit_createprogram {
+    clear: both;
+    width: 60px;
+}
+#comments { color: red; }
+
