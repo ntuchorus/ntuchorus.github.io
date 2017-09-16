@@ -1,6 +1,10 @@
 var ticketTable = {};
+var priceTable = [];
+var priceDiscountTable = [];
 var editTicketTable = {};
 var priceSelected = 0;
+var showTable = {'0': true, '1': false, '2': false, '3': false, '5': false};
+var nowProgram = 0;
 
 function updateSeat(id) {
     var finalState = ticketTable[id]['state'];
@@ -8,11 +12,10 @@ function updateSeat(id) {
     var finalPreserve = ticketTable[id]['preserve'];
     
     $('#' + id).attr('class', 'seat');
-    if(finalPreserve > 0)
-        $('#' + id).addClass('seat_type_6');
-    else{
-        if(id in editTicketTable)
+    if(showTable[finalPreserve]) {
+        if(id in editTicketTable){
             $('#' + id).addClass('seat_select');
+        }
         else{
             if(finalState == 2)
                 $('#' + id).addClass('seat_type_5');
@@ -22,14 +25,27 @@ function updateSeat(id) {
                 $('#' + id).addClass('seat_type_' + finalType);
         }
     }
+    else {
+        if(id in editTicketTable){
+            delete editTicketTable[id];
+            if(ticketTable[id]['type'] == 5)
+                priceSelected -= priceTable[finalType];
+            else
+                priceSelected -= priceTable[finalType] * priceDiscountTable[finalType] / 100;
+            $('#form_label').html('選取總金額：' + priceSelected + '元');
+        }
+        $('#' + id).addClass('seat_type_6');
+    }
 }
 
 function select(a) {
     var click_id = a.attr('id');
-    var click_price = ticketTable[click_id]['price'];
-    if(ticketTable[click_id]['type'] < 3)
-        click_price *= 0.9;
-    if(ticketTable[click_id]['type'] < 4 && ticketTable[click_id]['preserve'] == 0){
+    var click_type = ticketTable[click_id]['type'];
+    var click_price = priceTable[click_type];
+    if(click_type != 5)
+        click_price = click_price * priceDiscountTable[click_type] / 100;
+    
+    if(ticketTable[click_id]['preserve'] != 4 && showTable[ticketTable[click_id]['preserve']]){
         if(click_id in editTicketTable){
             delete editTicketTable[click_id];
             priceSelected -= click_price;
@@ -49,13 +65,16 @@ function commitData(mode){
         dataset.push(ticketTable[id]['id']);
     }
     fbsdkCheckLogin(function(fbID, fbToken){
-        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'drawTicket', 'data': dataset, 'mode': mode};
+        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updDraw', 'data': dataset, 'mode': mode};
         connectServer('POST',
                       JSON.stringify(commit),
-                      'edit',
+                      'update',
                       function(data){
             if(data["status"] == "0"){
                 window.location.reload();
+            }
+            else if(data["status"] == "2"){
+                alert('權限不足');
             }
             else{
                 alert('寫入失敗，請稍候再試或聯絡管理員');
@@ -65,77 +84,73 @@ function commitData(mode){
     return false;
 }
 
+function showData(data){
+    nowProgram = data['mapattribute'][0]['currentdataid'];
+    var nowCategory;
+    for(var i = 0; i < data['category'].length; i++){
+        if(data['category'][i]['id'] == nowProgram)
+            nowCategory = data['category'][i];
+    }
+    var titleStr = '台大合唱團' + nowCategory['year'];
+    if(nowCategory['season'] == 0)
+        titleStr += '冬季音樂會《';
+    else
+        titleStr += '夏季音樂會《';
+    titleStr += nowCategory['title'] + '》座位圖';
+    $('#programtitle').html(titleStr);
+
+    if(data['mapattribute'][0]['isshowhidden'] == 1)
+        showTable[0] = showTable[1] = true;
+    
+    $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
+    $('#update_message').html(nowCategory['message']);
+    $('#requesting').hide();
+
+    for(var i = 0; i < data['price'].length; i++){
+        priceTable[data['price'][i]['id']] = data['price'][i]['price'];
+        priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
+        $('.graphlabel_' + i).html(priceTable[i] + '元');
+    }
+
+    for(var i = 0; i < data['ticket'].length; i++){
+        var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
+        var seat_state = parseInt(data['ticket'][i]['state']);
+        var seat_type = parseInt(data['ticket'][i]['type']);
+        var seat_preserve = parseInt(data['ticket'][i]['preserve']);
+        var arr = {};
+        arr['id'] = parseInt(data['ticket'][i]['id']);
+        arr['state'] = parseInt(data['ticket'][i]['state']);
+        arr['type'] = parseInt(data['ticket'][i]['type']);
+        arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
+        ticketTable[seat_id] = arr;
+        updateSeat(seat_id);
+    }
+
+    $('#message').show();
+    $('#floor_type').show();
+    $('#floor_4').show();
+    $('#floor_3').show();
+    $('#floor_2').show();
+    $('#form').show();
+}
+
+
 $(document).ready(function(){
     fbsdkInitialization(function(){
         fbsdkCheckLogin(function(fbID, fbToken){
-            var dataset = {'id': fbID, 'token': fbToken};
+            var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTicket'};
             connectServer('POST',
                           JSON.stringify(dataset),
                           'request',
                           function(data){
-                if(data["status"] == "0"){
-                    $('#update_date').html('更新時間：' + data['message']['time'] + '　　　瀏覽次數：' + data['message']['counter']);
-                    $('#update_message').html(data['message']['message']);
-                    $('#requesting').hide();
-
-                    var statistic_sale = [0, 0, 0, 0, 0], statistic_total = [0, 0, 0, 0, 0], statistic_price = [400, 700, 1000, 1500];
-                    for(var i = 0; i < data['statistics'].length; i++){
-                        statistic_total[data['statistics'][i]['type']] += parseInt(data['statistics'][i]['num']);
-                        statistic_total[4] += parseInt(data['statistics'][i]['num']);
-                        if(parseInt(data['statistics'][i]['state']) == 2){
-                            statistic_sale[data['statistics'][i]['type']] += parseInt(data['statistics'][i]['num']);
-                            statistic_sale[4] += parseInt(data['statistics'][i]['num']);
-                        }
-                    }
-                    for(var i = 0; i < 4; i++){
-                        var rate = ((statistic_sale[i] / statistic_total[i]) * 100).toFixed(1);
-                        $('#statistic_label_' + i).html(statistic_price[i] + '元：' + rate + '%');
-                        $('#statistic_bar_progress_' + i).css('width', (rate * 1.7).toFixed());
-                    }
-                    $('#statistic_label_total').html("總計：" + (statistic_sale[4] / statistic_total[4] * 100).toFixed(1) + '%');
-                    $('#statistic_bar_progress_total').css('width', (statistic_sale[4] / statistic_total[4] * 170).toFixed());
-
-                    for(var i = 0; i < data['ticket'].length; i++){
-                        var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
-                        var seat_state = parseInt(data['ticket'][i]['state']);
-                        var seat_type = parseInt(data['ticket'][i]['type']);
-                        var seat_preserve = parseInt(data['ticket'][i]['preserve']);
-                        var arr = {};
-                        arr['id'] = parseInt(data['ticket'][i]['id']);
-                        arr['state'] = parseInt(data['ticket'][i]['state']);
-                        arr['type'] = parseInt(data['ticket'][i]['type']);
-                        arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
-                        arr['price'] = parseInt(data['ticket'][i]['price']);
-                        ticketTable[seat_id] = arr;
-                        if(seat_preserve > 0)
-                            $('#' + seat_id).addClass('seat_type_6');
-                        else if(seat_state == 2)
-                            $('#' + seat_id).addClass('seat_type_5');
-                        else if(seat_state == 1)
-                            $('#' + seat_id).addClass('seat_type_4');
-                        else{
-                            if(seat_type >= 4)
-                                $('#' + seat_id).addClass('seat_type_6');
-                            else
-                                $('#' + seat_id).addClass('seat_type_' + seat_type);
-                        }
-                    }
-                    $('#message').show();
-                    $('#floor_4').show();
-                    $('#floor_3').show();
-                    $('#floor_2').show();
-                    $('#statistic').show();
-                    $('#form').show();
-                }
-                else if(data["status"] == '1'){
+                if(data["status"] == "0")
+                    showData(data);
+                else if(data["status"] == '1')
                     $('#requesting').html('目前非購票時段');
-                }
-                else if(data["status"] == '2'){
+                else if(data["status"] == '2')
                     $('#requesting').html('權限不足');
-                }
-                else{
+                else
                     $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
-                }
             });
 
             $('a[id^=seat_]').click(function(){

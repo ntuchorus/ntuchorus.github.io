@@ -6,10 +6,14 @@
         <script type="text/javascript" src="js/connect.js"></script>
         <script type="text/javascript" src="js/request.js"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="css/typeset.css" rel="stylesheet" type="text/css" />
+        <link href="css/seat.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
-        <h1>台大合唱團2017夏季音樂會《魅》座位圖</h1>
+        <!-- Top Menu -->
+        <h1 id='programtitle'>台大合唱團音樂會座位圖</h1>
         <div class='floor' id='requesting'>
             正在讀取座位圖資訊......
         </div>
@@ -728,31 +732,31 @@
             <div class='container_graph'>
                 <div class='block_graph'>
                     <div class='graphicon_1'></div>
-                    <div class='graphlabel'>400元</div>
+                    <div class='graphlabel_0'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_2'></div>
-                    <div class='graphlabel'>700元</div>
+                    <div class='graphlabel_1'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_3'></div>
-                    <div class='graphlabel'>1000元</div>
+                    <div class='graphlabel_2'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_4'></div>
-                    <div class='graphlabel'>1500元</div>
+                    <div class='graphlabel_3'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_5'></div>
-                    <div class='graphlabel'>已劃票</div>
+                    <div class='graphlabel_pres'>已劃票</div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_6'></div>
-                    <div class='graphlabel'>已售票</div>
+                    <div class='graphlabel_sale'>已售票</div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_7'></div>
-                    <div class='graphlabel'>不販售</div>
+                    <div class='graphlabel_forb'>不販售</div>
                 </div>
             </div>
         </div>
@@ -1374,31 +1378,31 @@
             <div class='container_graph'>
                 <div class='block_graph'>
                     <div class='graphicon_1'></div>
-                    <div class='graphlabel'>400元</div>
+                    <div class='graphlabel_0'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_2'></div>
-                    <div class='graphlabel'>700元</div>
+                    <div class='graphlabel_1'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_3'></div>
-                    <div class='graphlabel'>1000元</div>
+                    <div class='graphlabel_2'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_4'></div>
-                    <div class='graphlabel'>1500元</div>
+                    <div class='graphlabel_3'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_5'></div>
-                    <div class='graphlabel'>已劃票</div>
+                    <div class='graphlabel_forb'>已劃票</div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_6'></div>
-                    <div class='graphlabel'>已售票</div>
+                    <div class='graphlabel_sale'>已售票</div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_7'></div>
-                    <div class='graphlabel'>不販售</div>
+                    <div class='graphlabel_forb'>不販售</div>
                 </div>
             </div>
         </div>
@@ -2973,31 +2977,31 @@
             <div class='container_graph'>
                 <div class='block_graph'>
                     <div class='graphicon_1'></div>
-                    <div class='graphlabel'>400元</div>
+                    <div class='graphlabel_0'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_2'></div>
-                    <div class='graphlabel'>700元</div>
+                    <div class='graphlabel_1'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_3'></div>
-                    <div class='graphlabel'>1000元</div>
+                    <div class='graphlabel_2'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_4'></div>
-                    <div class='graphlabel'>1500元</div>
+                    <div class='graphlabel_3'></div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_5'></div>
-                    <div class='graphlabel'>已劃票</div>
+                    <div class='graphlabel_prev'>已劃票</div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_6'></div>
-                    <div class='graphlabel'>已售票</div>
+                    <div class='graphlabel_sale'>已售票</div>
                 </div>
                 <div class='block_graph'>
                     <div class='graphicon_7'></div>
-                    <div class='graphlabel'>不販售</div>
+                    <div class='graphlabel_forb'>不販售</div>
                 </div>
             </div>
         </div>
@@ -3005,25 +3009,25 @@
             <div class='floor_label'>售票率統計</div>
             <div class='container_statistic'>
                 <div class='statistic_entry'>
-                    <div class='statistic_label' id='statistic_label_0'>400元：</div>
+                    <div class='statistic_label' id='statistic_label_0'></div>
                     <div class='statistic_bar' id='statistic_bar_0'>
                         <div class='statistic_bar_progress' id='statistic_bar_progress_0'></div>
                     </div>
                 </div>
                 <div class='statistic_entry'>
-                    <div class='statistic_label' id='statistic_label_1'>700元：</div>
+                    <div class='statistic_label' id='statistic_label_1'></div>
                     <div class='statistic_bar' id='statistic_bar_1'>
                         <div class='statistic_bar_progress' id='statistic_bar_progress_1'></div>
                     </div>
                 </div>
                 <div class='statistic_entry'>
-                    <div class='statistic_label' id='statistic_label_2'>1000元：</div>
+                    <div class='statistic_label' id='statistic_label_2'></div>
                     <div class='statistic_bar' id='statistic_bar_2'>
                         <div class='statistic_bar_progress' id='statistic_bar_progress_2'></div>
                     </div>
                 </div>
                 <div class='statistic_entry'>
-                    <div class='statistic_label' id='statistic_label_3'>1500元：</div>
+                    <div class='statistic_label' id='statistic_label_3'></div>
                     <div class='statistic_bar' id='statistic_bar_3'>
                         <div class='statistic_bar_progress' id='statistic_bar_progress_3'></div>
                     </div>
