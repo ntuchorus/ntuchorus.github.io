@@ -1,0 +1,55 @@
+body, div, ul, li, h1, h2, h3, h4, h5, h6, p { 
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: "Calibri", "Heiti TC", "微軟正黑體";
+}
+h1 {
+    font-size: 40px;
+    color: #3B3B3B;
+}
+a {
+    text-decoration: none;
+}
+
+#requesting {
+    font-size: 30px;
+    color: #404480;
+}
+.floor {
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 1000px;
+    margin: 20 auto;
+    background: #f5f5f5;
+}
+.floor_label, .floor_label_sub {
+    margin: 0 auto;
+    clear: both;
+    display: block;
+    color: #4A4A4A;
+}
+.floor_label {
+    height: 40px;
+    line-height: 40px;
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+.floor_label_sub {
+    height: 30px;
+    line-height: 30px;
+    padding-bottom: 10px;
+    font-size: 25px;
+}
+
+/* Message */
+#update_date {
+    font-size: 18px;
+    color: #994242;
+}
+#update_message {
+    font-size: 25px;
+    color: #3D703A;
+}
+
