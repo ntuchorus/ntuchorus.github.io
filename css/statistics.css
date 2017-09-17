@@ -1,5 +1,5 @@
 /* Visibility Init */
-#floor_statistic_1, #floor_statistic_2, #floor_statistic_3, #floor_statistic_4, #floor_statistic_5 {
+#switcher, #floor_statistic_1, #floor_statistic_2, #floor_statistic_3, #floor_statistic_4, #floor_statistic_5 {
     display: none;
     color: #4A4A4A;
 }
@@ -17,6 +17,22 @@
     height: 25px;
     line-height: 25px;
 }
+
+/* switcher */
+#switcher_functionlist {
+    height: 25px;
+    line-height: 25px;
+}
+#button_function_backup {
+    float: left;
+    margin-left: 450px;
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+    color: #3B3B3B;
+    background: #e0e0e0;
+}
+
 
 /* Floor 1 */
 .entry_1_type, .entry_1_type_0, .entry_1_type_1, .entry_1_type_2, .entry_1_type_3,
@@ -135,4 +151,4 @@
     color: #3B3B3B;
     background: #e0e0e0;
 }
-#button4_sort_total:hover, #button4_sort_department:hover, #button5_sort_id:hover, #button5_sort_date:hover { background: #cccccc; }
+#button_function_backup:hover, #button4_sort_total:hover, #button4_sort_department:hover, #button5_sort_id:hover, #button5_sort_date:hover { background: #cccccc; }

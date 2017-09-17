@@ -1,3 +1,4 @@
+var nowProgram = -1;
 var data_floor1 = {};
 var data_floor2_1 = [];
 var data_floor2_2 = [];
@@ -9,7 +10,33 @@ var preserveTable = ['團員票', '老師票', '友團票', '老人票', 'VIP票
 var paymodeTable = ['付清', '賒帳'];
 var priceTable = [];
 var priceDiscountTable = [];
-var nowProgram = 0;
+
+function programChange(e){
+    $('#requesting').html("正在讀取座位圖資訊......");
+    $('#requesting').show();
+    $('#switcher').hide();
+    $('#floor_statistic_1').hide();
+    $('#floor_statistic_2').hide();
+    $('#floor_statistic_3').hide();
+    $('#floor_statistic_4').hide();
+    $('#floor_statistic_5').hide();
+    nowProgram = e.value;
+    data_floor1 = {};
+    data_floor2_1 = [];
+    data_floor2_2 = [];
+    data_floor4 = [];
+    data_floor5 = [];
+    salerTable = [];
+    priceTable = [];
+    priceDiscountTable = [];
+    $('#select_viewprogram').html("");
+    $('#container_floor1_data').html("");
+    $('#container_floor2_1_data').html("");
+    $('#container_floor2_2_data').html("");
+    $('#container_floor4_data').html("");
+    $('#container_floor5_data').html("");
+    getData(nowProgram);
+}
 
 function showFloor1Entry(num, entry){
     var sale = entry['type0'] + entry['type1'] +  entry['type2'] + entry['type3'];
@@ -117,7 +144,20 @@ function relistFloor5(method){
 
 
 function showData(data){
-    nowProgram = data['mapattribute'][0]['currentdataid'];
+    if(nowProgram == -1)
+        nowProgram = data['mapattribute'][0]['currentdataid'];
+    for(var i = 0; i < data['category'].length; i++){
+        var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];
+        if(data['category'][i]['season'] == 0)
+            addStr += '冬季';
+        else
+            addStr += '夏季';
+        addStr += "《" + data['category'][i]['title'] + "》</option>";
+        $('#select_viewprogram').append(addStr);
+        if(data['category'][i]['id'] == nowProgram){
+            $('#select_viewprogram').val(nowProgram);
+        }
+    }
     for(var i = 0; i < data['queryManager'].length; i++)
         salerTable[data['queryManager'][i]['id']] = data['queryManager'][i]['name'];
     for(var i = 0; i < data['price'].length; i++){
@@ -230,6 +270,7 @@ function showData(data){
     }
 
     $('#requesting').hide();
+    $('#switcher').show();
     $('#floor_statistic_1').show();
     $('#floor_statistic_2').show();
     $('#floor_statistic_3').show();
@@ -237,44 +278,46 @@ function showData(data){
     $('#floor_statistic_5').show();
 }
 
+function getData(pid){
+    fbsdkCheckLogin(function(fbID, fbToken){
+        var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTotal'};
+        if(pid != -1)
+            dataset['programid'] = pid;
+        connectServer('POST',
+                      JSON.stringify(dataset),
+                      'request',
+                      function(data){
+            if(data["status"] == "0")
+                showData(data);
+            else if(data["status"] == '1')
+                $('#requesting').html('目前非購票時段');
+            else if(data["status"] == '2')
+                $('#requesting').html('權限不足');
+            else
+                $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
+        });
+    });
+}
 
 $(document).ready(function(){
     fbsdkInitialization(function(){
-        fbsdkCheckLogin(function(fbID, fbToken){
-            var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTotal'};
-            connectServer('POST',
-                          JSON.stringify(dataset),
-                          'request',
-                          function(data){
-                if(data["status"] == "0")
-                    showData(data);
-                else if(data["status"] == '1')
-                    $('#requesting').html('目前非購票時段');
-                else if(data["status"] == '2')
-                    $('#requesting').html('權限不足');
-                else
-                    $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
-            });
-
-            $('#button4_sort_total').click(function(){
-                relistFloor4(sortFloor4Total);
-                return false;
-            });
-            $('#button4_sort_department').click(function(){
-                relistFloor4(sortFloor4Department);
-                return false;
-            });
-            $('#button5_sort_id').click(function(){
-                relistFloor5(sortFloor5Id);
-                return false;
-            });
-            $('#button5_sort_date').click(function(){
-                relistFloor5(sortFloor5Date);
-                return false;
-            });
-
+        getData(nowProgram);
+        $('#button4_sort_total').click(function(){
+            relistFloor4(sortFloor4Total);
+            return false;
+        });
+        $('#button4_sort_department').click(function(){
+            relistFloor4(sortFloor4Department);
+            return false;
+        });
+        $('#button5_sort_id').click(function(){
+            relistFloor5(sortFloor5Id);
+            return false;
+        });
+        $('#button5_sort_date').click(function(){
+            relistFloor5(sortFloor5Date);
+            return false;
         });
     });
     
 });
-
