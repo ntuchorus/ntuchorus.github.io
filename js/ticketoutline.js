@@ -1,13 +1,36 @@
-var nowProgram = 0;
+var nowProgram = -1;
 var priceTable = [];
 
+function programChange(e){
+    $('#requesting').html("正在讀取座位圖資訊......");
+    $('#requesting').show();
+    $('#message').hide();
+    $('#floor_4').hide();
+    $('#floor_3').hide();
+    $('#floor_2').hide();
+    $('#statistic').hide();
+    nowProgram = e.value;
+    priceTable = [];
+    $('#select_viewprogram').html("");
+    getData(nowProgram);
+}
 
 function showData(data){
-    nowProgram = data['mapattribute'][0]['currentdataid'];
+    if(nowProgram == -1)
+        nowProgram = data['mapattribute'][0]['currentdataid'];
     var statistic_sale = [0, 0, 0, 0, 0], statistic_total = [0, 0, 0, 0, 0], nowCategory;
     for(var i = 0; i < data['category'].length; i++){
-        if(data['category'][i]['id'] == nowProgram)
+        var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];
+        if(data['category'][i]['season'] == 0)
+            addStr += '冬季';
+        else
+            addStr += '夏季';
+        addStr += "《" + data['category'][i]['title'] + "》</option>";
+        $('#select_viewprogram').append(addStr);
+        if(data['category'][i]['id'] == nowProgram){
             nowCategory = data['category'][i];
+            $('#select_viewprogram').val(nowProgram);
+        }
     }
     
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
@@ -64,9 +87,10 @@ function showData(data){
     $('#statistic').show();
 }
 
-
-$(document).ready(function(){
+function getData(pid){
     var dataset = {'id': 'guest', 'cmd': 'reqMap'};
+    if(pid != -1)
+        dataset['programid'] = pid;
     connectServer('POST',
                   JSON.stringify(dataset),
                   'request',
@@ -78,7 +102,10 @@ $(document).ready(function(){
         else if(data["status"] == '2')
             $('#requesting').html('權限不足');
         else
-            $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
-      
+            $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員'); 
     });
+}
+
+$(document).ready(function(){
+    getData(nowProgram);
 });

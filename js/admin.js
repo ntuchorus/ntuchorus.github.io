@@ -1,10 +1,30 @@
+var nowProgram = -1;
 var ticketTable = {};
 var priceTable = [];
 var priceDiscountTable = [];
 var editTicketTable = {};
 var priceSelected = 0;
 var showTable = {'0': true, '1': false, '2': false, '3': false, '5': false};
-var nowProgram = 0;
+
+function programChange(e){
+    $('#programtitle').html("台大合唱團音樂會座位圖");
+    $('#requesting').html("正在讀取座位圖資訊......");
+    $('#requesting').show();
+    $('#message').hide();
+    $('#floor_4').hide();
+    $('#floor_3').hide();
+    $('#floor_2').hide();
+    $('#form').hide();
+    nowProgram = e.value;
+    ticketTable = {};
+    priceTable = [];
+    priceDiscountTable = [];
+    editTicketTable = {};
+    priceSelected = 0;
+    showTable = {'0': true, '1': false, '2': false, '3': false, '5': false};
+    $('#select_viewprogram').html("");
+    getData(nowProgram);
+}
 
 function updateSeat(id) {
     var finalState = ticketTable[id]['state'];
@@ -65,7 +85,7 @@ function commitData(mode){
         dataset.push(ticketTable[id]['id']);
     }
     fbsdkCheckLogin(function(fbID, fbToken){
-        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updDraw', 'data': dataset, 'mode': mode};
+        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updDraw', 'data': dataset, 'mode': mode, 'programid': nowProgram};
         connectServer('POST',
                       JSON.stringify(commit),
                       'update',
@@ -85,11 +105,21 @@ function commitData(mode){
 }
 
 function showData(data){
-    nowProgram = data['mapattribute'][0]['currentdataid'];
+    if(nowProgram == -1)
+        nowProgram = data['mapattribute'][0]['currentdataid'];
     var nowCategory;
     for(var i = 0; i < data['category'].length; i++){
-        if(data['category'][i]['id'] == nowProgram)
+        var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];
+        if(data['category'][i]['season'] == 0)
+            addStr += '冬季';
+        else
+            addStr += '夏季';
+        addStr += "《" + data['category'][i]['title'] + "》</option>";
+        $('#select_viewprogram').append(addStr);
+        if(data['category'][i]['id'] == nowProgram){
             nowCategory = data['category'][i];
+            $('#select_viewprogram').val(nowProgram);
+        }
     }
     var titleStr = '台大合唱團' + nowCategory['year'];
     if(nowCategory['season'] == 0)
@@ -127,49 +157,52 @@ function showData(data){
     }
 
     $('#message').show();
-    $('#floor_type').show();
     $('#floor_4').show();
     $('#floor_3').show();
     $('#floor_2').show();
     $('#form').show();
 }
 
+function getData(pid){
+    fbsdkCheckLogin(function(fbID, fbToken){
+        var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTicket'};
+        if(pid != -1)
+            dataset['programid'] = pid;
+        connectServer('POST',
+                      JSON.stringify(dataset),
+                      'request',
+                      function(data){
+            if(data["status"] == "0")
+                showData(data);
+            else if(data["status"] == '1')
+                $('#requesting').html('目前非購票時段');
+            else if(data["status"] == '2')
+                $('#requesting').html('權限不足');
+            else
+                $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
+        });
+    });
+}
+
 
 $(document).ready(function(){
     fbsdkInitialization(function(){
-        fbsdkCheckLogin(function(fbID, fbToken){
-            var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTicket'};
-            connectServer('POST',
-                          JSON.stringify(dataset),
-                          'request',
-                          function(data){
-                if(data["status"] == "0")
-                    showData(data);
-                else if(data["status"] == '1')
-                    $('#requesting').html('目前非購票時段');
-                else if(data["status"] == '2')
-                    $('#requesting').html('權限不足');
-                else
-                    $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
-            });
-
-            $('a[id^=seat_]').click(function(){
-                select($(this));
-                return false;
-            });
-            $('#submit_clear').click(function(){
-                commitData(0);
-                return false;
-            });
-            $('#submit_occupy').click(function(){
-                commitData(1);
-                return false;
-            });
-            $('#submit_sale').click(function(){
-                commitData(2);
-                return false;
-            });
-
+        getData(nowProgram);
+        $('a[id^=seat_]').click(function(){
+            select($(this));
+            return false;
+        });
+        $('#submit_clear').click(function(){
+            commitData(0);
+            return false;
+        });
+        $('#submit_occupy').click(function(){
+            commitData(1);
+            return false;
+        });
+        $('#submit_sale').click(function(){
+            commitData(2);
+            return false;
         });
     });
 });

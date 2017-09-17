@@ -45,11 +45,33 @@ a {
 
 /* Message */
 #update_date {
+    float: left;
+    width: 500px;
+    margin-left: 250px;
     font-size: 18px;
     color: #994242;
+    height: 25px;
+    line-height: 25px;
 }
 #update_message {
+    clear: both;
     font-size: 25px;
     color: #3D703A;
+}
+#select_viewprogram {
+    text-align-last: center;
+    float: right;
+    margin-right: 20px;
+    border: none;
+    font-size: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #FFFFFF;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 230px;
+    height: 25px;
+    line-height: 25px;
 }
 

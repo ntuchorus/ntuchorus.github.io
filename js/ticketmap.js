@@ -1,3 +1,4 @@
+var nowProgram = -1;
 var ticketTable = {};
 var priceTable = [];
 var priceDiscountTable = [];
@@ -5,8 +6,35 @@ var selectedTicketTable = {};
 var salerTable = [];
 var payTable = {};
 var creditTable = {};
-var nowProgram = 0;
 var departmentTable = ['Soprano', 'Alto', 'Tenor', 'Bass', '團外', '老師', '友團', '老人'];
+
+function programChange(e){
+    $('#requesting').html("正在讀取座位圖資訊......");
+    $('#requesting').show();
+    $('#message').hide();
+    $('#floor_4').hide();
+    $('#floor_3').hide();
+    $('#floor_2').hide();
+    $('#form').hide();
+    $('#submit_buyer').val('');
+    $('#submit_department').val('');
+    $('#submit_date').val('');
+    $('#submit_saler').val('');
+    $('#submit_paymode').val('');
+    $('#submit_discount').val('');
+    $('#total_price').html('0元');
+    $('#total_priceowe').html('0元');
+    nowProgram = e.value;
+    ticketTable = {};
+    priceTable = [];
+    priceDiscountTable = [];
+    selectedTicketTable = {};
+    salerTable = [];
+    payTable = {};
+    reditTable = {};
+    $('#select_viewprogram').html("");
+    getData(nowProgram);
+}
 
 function select(a) {
     var click_id = a.attr('id');
@@ -70,24 +98,32 @@ function select(a) {
     }
 }
 
-
 function showData(data){
-    nowProgram = data['mapattribute'][0]['currentdataid'];
+    if(nowProgram == -1)
+        nowProgram = data['mapattribute'][0]['currentdataid'];
     var nowCategory;
     for(var i = 0; i < data['category'].length; i++){
-        if(data['category'][i]['id'] == nowProgram)
+        var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];
+        if(data['category'][i]['season'] == 0)
+            addStr += '冬季';
+        else
+            addStr += '夏季';
+        addStr += "《" + data['category'][i]['title'] + "》</option>";
+        $('#select_viewprogram').append(addStr);
+        if(data['category'][i]['id'] == nowProgram){
             nowCategory = data['category'][i];
+            $('#select_viewprogram').val(nowProgram);
+        }
     }
     
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
     $('#update_message').html(nowCategory['message']);
     $('#requesting').hide();
-    $('a[id^=seat_]').addClass('seat_type_2');
+    $('a[id^=seat_]').attr('class', 'seat seat_type_2');
 
     for(var i = 0; i < data['price'].length; i++){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
         priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
-        //$('.graphlabel_' + i).html(priceTable[i] + '元');
     }
     for(var i = 0; i < data['manager'].length; i++)
         salerTable[data['manager'][i]['id']] = data['manager'][i]['name'];
@@ -124,29 +160,33 @@ function showData(data){
     $('#form').show();
 }
 
+function getData(pid){
+    fbsdkCheckLogin(function(fbID, fbToken){
+        var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqOrder'};
+        if(pid != -1)
+            dataset['programid'] = pid;
+        connectServer('POST',
+                      JSON.stringify(dataset),
+                      'request',
+                      function(data){
+            if(data["status"] == "0")
+                showData(data);
+            else if(data["status"] == '1')
+                $('#requesting').html('目前非購票時段');
+            else if(data["status"] == '2')
+                $('#requesting').html('權限不足');
+            else
+                $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
+        });
+    });
+}
 
 $(document).ready(function(){
     fbsdkInitialization(function(){
-        fbsdkCheckLogin(function(fbID, fbToken){
-            var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqOrder'};
-            connectServer('POST',
-                          JSON.stringify(dataset),
-                          'request',
-                          function(data){
-                if(data["status"] == "0")
-                    showData(data);
-                else if(data["status"] == '1')
-                    $('#requesting').html('目前非購票時段');
-                else if(data["status"] == '2')
-                    $('#requesting').html('權限不足');
-                else
-                    $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
-            });
-
-            $('a[id^=seat_]').click(function(){
-                select($(this));
-                return false;
-            });
+        getData(nowProgram);
+        $('a[id^=seat_]').click(function(){
+            select($(this));
+            return false;
         });
     });
 });

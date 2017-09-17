@@ -1,12 +1,32 @@
+var nowProgram = -1;
 var ticketTable = {};
 var priceTable = [];
 var priceDiscountTable = [];
 var editTicketTableType = {};
 var editTicketTablePreserve = {};
-var nowProgram = 0;
 var editSelector = 0;
 /* 10: 400  11: 700  12: 1000  13: 1500 14: vip */
 /* 20: none 21: teacher 22: friend 23:old 24: vip 25: system */
+
+function programChange(e){
+    $('#requesting').html("正在讀取座位圖資訊......");
+    $('#requesting').show();
+    $('#message').hide();
+    $('#selectors').hide();
+    $('#floor_4').hide();
+    $('#floor_3').hide();
+    $('#floor_2').hide();
+    $('#form').hide();
+    nowProgram = e.value;
+    ticketTable = {};
+    priceTable = [];
+    priceDiscountTable = [];
+    editTicketTableType = {};
+    editTicketTablePreserve = {};
+    editSelector = 0;
+    $('#select_viewprogram').html("");
+    getData(nowProgram);
+}
 
 function pickSelector(a) {
     var id = a.find('div[class^=graphicon_]').attr('class').split('_');
@@ -16,7 +36,6 @@ function pickSelector(a) {
         editSelector = 20 + parseInt(id[2]);
     return false;
 }
-
 
 function updateSeat(id) {
     var finalState = ticketTable[id]['state'];
@@ -91,7 +110,7 @@ function commitData(){
             dataset[id] = {'id': ticketTable[id]['id'], 'type': ticketTable[id]['type'], 'preserve': editTicketTablePreserve[id]};
     }
     fbsdkCheckLogin(function(fbID, fbToken){
-        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updSetTicket', 'data': dataset};
+        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updSetTicket', 'data': dataset, 'programid': nowProgram};
         connectServer('POST',
                       JSON.stringify(commit),
                       'update',
@@ -109,7 +128,7 @@ function commitData(){
 
 function commitClear(){
     fbsdkCheckLogin(function(fbID, fbToken){
-        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updClearPreserve'};
+        var commit = {'id': fbID, 'token': fbToken, 'cmd': 'updClearPreserve', 'programid': nowProgram};
         connectServer('POST',
                       JSON.stringify(commit),
                       'update',
@@ -125,11 +144,21 @@ function commitClear(){
 
 
 function showData(data){
-    nowProgram = data['mapattribute'][0]['currentdataid'];
+    if(nowProgram == -1)
+        nowProgram = data['mapattribute'][0]['currentdataid'];
     var nowCategory;
     for(var i = 0; i < data['category'].length; i++){
-        if(data['category'][i]['id'] == nowProgram)
+        var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];
+        if(data['category'][i]['season'] == 0)
+            addStr += '冬季';
+        else
+            addStr += '夏季';
+        addStr += "《" + data['category'][i]['title'] + "》</option>";
+        $('#select_viewprogram').append(addStr);
+        if(data['category'][i]['id'] == nowProgram){
             nowCategory = data['category'][i];
+            $('#select_viewprogram').val(nowProgram);
+        }
     }
     
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
@@ -160,36 +189,63 @@ function showData(data){
     $('#form').show();
 }
 
+function getData(pid){
+    fbsdkCheckLogin(function(fbID, fbToken){
+        var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTicket'};
+        if(pid != -1)
+            dataset['programid'] = pid;
+        connectServer('POST',
+                      JSON.stringify(dataset),
+                      'request',
+                      function(data){
+            if(data["status"] == "0")
+                showData(data);
+            else if(data["status"] == '1')
+                $('#requesting').html('目前非購票時段');
+            else if(data["status"] == '2')
+                $('#requesting').html('權限不足');
+            else
+                $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
+        });
+    });
+}
+
 
 $(document).ready(function(){
     fbsdkInitialization(function(){
-        fbsdkCheckLogin(function(fbID, fbToken){
-            var dataset = {'id': fbID, 'token': fbToken, 'cmd': 'reqTicket'};
-            connectServer('POST',
-                          JSON.stringify(dataset),
-                          'request',
-                          function(data){
-                if(data["status"] == "0")
-                    showData(data);
-                else if(data["status"] == '1')
-                    $('#requesting').html('目前非購票時段');
-                else if(data["status"] == '2')
-                    $('#requesting').html('權限不足');
-                else
-                    $('#requesting').html('讀取失敗，請稍候再試或聯絡管理員');
-            });
-
-            $('a[id^=seat_]').click(function(){
-                select($(this));
-                return false;
-            });
-            $('div[class=block_graph] a').click(function(){
-                pickSelector($(this));
-                return false;
-            });
-            $('#submit_change').click(commitData);
-            $('#submit_clear').click(commitClear);
+        $('a[id^=seat_]').click(function(){
+            select($(this));
+            return false;
         });
+        $('#submit_clear').click(function(){
+            commitData(0);
+            return false;
+        });
+        $('#submit_occupy').click(function(){
+            commitData(1);
+            return false;
+        });
+        $('#submit_sale').click(function(){
+            commitData(2);
+            return false;
+        });
+    });
+});
+
+
+$(document).ready(function(){
+    fbsdkInitialization(function(){
+        getData(nowProgram);
+        $('a[id^=seat_]').click(function(){
+            select($(this));
+            return false;
+        });
+        $('div[class=block_graph] a').click(function(){
+            pickSelector($(this));
+            return false;
+        });
+        $('#submit_change').click(commitData);
+        $('#submit_clear').click(commitClear);
     });
 });
 
