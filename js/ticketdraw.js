@@ -21,7 +21,6 @@ function programChange(e){
     priceDiscountTable = [];
     editTicketTable = {};
     priceSelected = 0;
-    showTable = {'0': true, '1': false, '2': false, '3': false, '5': false};
     $('#select_viewprogram').html("");
     getData(nowProgram);
 }
