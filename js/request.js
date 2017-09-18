@@ -73,6 +73,7 @@ function showData(data){
         var seat_state = parseInt(data['ticket'][i]['state']);
         var seat_type = parseInt(data['ticket'][i]['type']);
         var seat_preserve = parseInt(data['ticket'][i]['preserve']);
+        $(seatid).attr('class', 'seat');
         if(seat_preserve > 0 && data['mapattribute'][0]['isshowhidden'] == 0)
             $(seat_id).addClass('seat_type_6');
         else if((seat_preserve == 1 || seat_preserve >= 4) && data['mapattribute'][0]['isshowhidden'] == 1)
