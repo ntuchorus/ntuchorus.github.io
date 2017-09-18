@@ -251,8 +251,8 @@ function showData(data){
         if(insert['buyer'] in data_floor4_creditlist)
             insert['oweprice'] -= data_floor4_creditlist[insert['buyer']];
         data_floor4.push(insert);
-        showFloor4Entry(i + 1, insert);
     }
+    relistFloor4(sortFloor4Total);
 
     /* Floor 5 table */
     var data_floor5_creditlist = {};
@@ -266,8 +266,8 @@ function showData(data){
         if(insert['id'] in data_floor5_creditlist)
             insert['oweprice'] -= data_floor5_creditlist[insert['id']];
         data_floor5.push(insert);
-        showFloor5Entry(i + 1, insert);
     }
+    relistFloor5(sortFloor5Id);
 
     $('#requesting').hide();
     $('#switcher').show();
