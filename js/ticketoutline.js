@@ -18,6 +18,7 @@ function programChange(e){
 function showData(data){
     if(nowProgram == -1)
         nowProgram = data['mapattribute'][0]['currentdataid'];
+    $('#menumanager').html("此頁不需登入");
     var statistic_sale = [0, 0, 0, 0, 0], statistic_total = [0, 0, 0, 0, 0], nowCategory;
     for(var i = 0; i < data['category'].length; i++){
         var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];

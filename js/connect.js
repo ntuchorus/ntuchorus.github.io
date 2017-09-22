@@ -5,7 +5,7 @@ function connectServer(type, dataset, server, callback){
         contentType: 'application/json',
         dataType: 'json',
         crossDomain: true,
-        url: "http://139.162.109.232:3000/" + server,
+        url: "http://139.162.109.232:3001/" + server,
         success: function(data){
         	callback(data);
         },

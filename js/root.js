@@ -129,6 +129,7 @@ function showMemberEntry(data){
 
 function showData(data){
     nowProgram = data['mapattribute'][0]['currentdataid'];
+    $('#menumanager').html("Hi, " + data['user']['name']);
     var nowCategory;
     for(var i = 0; i < data['category'].length; i++){
         if(data['category'][i]['id'] == nowProgram)

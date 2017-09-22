@@ -107,6 +107,7 @@ function commitData(){
 function showData(data){
     if(nowProgram == -1)
         nowProgram = data['mapattribute'][0]['currentdataid'];
+    $('#menumanager').html("Hi, " + data['user']['name']);
     var nowCategory;
     for(var i = 0; i < data['category'].length; i++){
         var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];

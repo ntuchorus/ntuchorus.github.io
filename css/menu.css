@@ -24,7 +24,7 @@
     line-height: 35px;
 }
 
-#menuinner ul li {
+#menuinner ul li:not([id=menumanager]) {
     list-style-type: none;
     float: left;
     margin: 10 10 10 0;
@@ -67,4 +67,14 @@
 
 #menuinner ul li a[id^=menubutton_][id$=on], #menuinner ul li a[id^=menubutton_]:hover {
     background: #2b8faf;
+}
+
+#menumanager {
+    list-style-type: none;
+    float: left;
+    margin: 10 0 10 10;
+    width: 190px;
+    border-radius: 5px;
+    color: #cccccc;
+    background: #333333;
 }
