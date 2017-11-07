@@ -118,7 +118,7 @@ function showData(data){
         else if(seat_state == 1)
             $(seat_id).addClass('seat_type_a');
         else{
-            if(seat_type >= 4)
+            if(seat_type >= data['price'].length - 1)
                 $(seat_id).addClass('seat_type_c');
             else
                 $(seat_id).addClass('seat_type_' + seat_type);
