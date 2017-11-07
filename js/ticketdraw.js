@@ -3,6 +3,7 @@ var ticketTable = {};
 var priceTable = [];
 var priceDiscountTable = [];
 var editTicketTable = {};
+var typeSelected = [];
 var priceSelected = 0;
 var showTable = {'0': true, '1': false, '2': false, '3': false, '5': false};
 
@@ -20,8 +21,10 @@ function programChange(e){
     priceTable = [];
     priceDiscountTable = [];
     editTicketTable = {};
+    typeSelected = [];
     priceSelected = 0;
     $('#select_viewprogram').html("");
+    $('#form_label').html('選取總金額：0元');
     getData(nowProgram);
 }
 
@@ -37,9 +40,9 @@ function updateSeat(id) {
         }
         else{
             if(finalState == 2)
-                $('#' + id).addClass('seat_type_5');
+                $('#' + id).addClass('seat_type_b');
             else if(finalState == 1)
-                $('#' + id).addClass('seat_type_4');
+                $('#' + id).addClass('seat_type_a');
             else
                 $('#' + id).addClass('seat_type_' + finalType);
         }
@@ -47,14 +50,39 @@ function updateSeat(id) {
     else {
         if(id in editTicketTable){
             delete editTicketTable[id];
-            if(ticketTable[id]['type'] == 5)
+            if(finalPreserve == 5)
                 priceSelected -= priceTable[finalType];
             else
                 priceSelected -= priceTable[finalType] * priceDiscountTable[finalType] / 100;
+            typeSelected[finalType] -= 1;
+            $('#submit_count_type' + finalType).html(typeSelected[finalType]);
             $('#form_label').html('選取總金額：' + priceSelected + '元');
         }
-        $('#' + id).addClass('seat_type_6');
+        $('#' + id).addClass('seat_type_c');
     }
+}
+
+function showIconGraph(){
+    var str = "";
+    for(var i = 0; i < priceTable.length - 1; i++){
+        str += "<div class='block_graph'>" +
+                   "<div class='graphicon_" + i + "'></div>" +
+                   "<div class='graphlabel_" + i + "'>" + priceTable[i] + "元</div>" +
+               "</div>";
+    }
+    str += "<div class='block_graph'>" +
+               "<div class='graphicon_a'></div>" +
+               "<div class='graphlabel_pres'>已劃票</div>" +
+           "</div>" +
+           "<div class='block_graph'>" +
+               "<div class='graphicon_b'></div>" +
+               "<div class='graphlabel_sale'>已售票</div>" +
+           "</div>" +
+           "<div class='block_graph'>" +
+               "<div class='graphicon_c'></div>" +
+               "<div class='graphlabel_forb'>不販售</div>" +
+           "</div>";
+    $(".container_graph").html(str).css('width', 105 * (priceTable.length + 2));
 }
 
 function showSaleData(box) {
@@ -67,21 +95,34 @@ function showSaleData(box) {
     });
 }
 
+function showTypeSelected() {
+    var str = "";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div id='submit_count_type" + i + "'>0</div>";
+    $('#submit_count').html(str);
+    $('#submit_count').css('margin-left', 500 - ((priceTable.length - 1) * 70 - 20) / 2);
+}
+
 function select(a) {
     var click_id = a.attr('id');
     var click_type = ticketTable[click_id]['type'];
+    var click_preserve = ticketTable[click_id]['preserve'];
     var click_price = priceTable[click_type];
-    if(click_type != 5)
+    if(click_preserve != 5)
         click_price = click_price * priceDiscountTable[click_type] / 100;
     
-    if(ticketTable[click_id]['preserve'] != 4 && showTable[ticketTable[click_id]['preserve']]){
+    if(click_preserve != 4 && showTable[click_preserve]){
         if(click_id in editTicketTable){
             delete editTicketTable[click_id];
             priceSelected -= click_price;
+            typeSelected[click_type] -= 1;
+            $('#submit_count_type' + click_type).html(typeSelected[click_type]);
         }
         else{
             editTicketTable[click_id] = 1;
             priceSelected += click_price;
+            typeSelected[click_type] += 1;
+            $('#submit_count_type' + click_type).html(typeSelected[click_type]);
         }
         updateSeat(click_id);
     }
@@ -136,8 +177,10 @@ function showData(data){
     for(var i = 0; i < data['price'].length; i++){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
         priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
-        $('.graphlabel_' + i).html(priceTable[i] + '元');
+        typeSelected[i] = 0;
     }
+    showIconGraph();
+    showTypeSelected();
 
     for(var i = 0; i < data['ticket'].length; i++){
         var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];

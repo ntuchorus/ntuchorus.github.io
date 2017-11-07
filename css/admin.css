@@ -25,18 +25,16 @@
 }
 #container_form {
     margin: 0 auto;
+    height: 40px;
+}
+#container_submit {
+    margin: 0 auto;
     width: 360px;
     height: 40px;
 }
 .container_graph {
     padding-top: 15px;
     margin: 0 auto;
-    width: 840px;
-    height: 25px;
-}
-#container_type {
-    margin: 0 auto;
-    width: 750px;
     height: 25px;
 }
 
@@ -54,31 +52,34 @@ div[class^=graphlabel] {
     text-align: left;
     margin-left: 5px;
     font-size: 18px;
-    width: 90px;
+    width: 75px;
     height: 25px;
     line-height: 25px;
     color: #4A4A4A;
 }
 
-.graphicon_1, .seat_type_0 {
+.graphicon_0, .seat_type_0, #submit_count_type0 {
     background: #BAE89B;
 }
-.graphicon_2, .seat_type_1 {
+.graphicon_1, .seat_type_1, #submit_count_type1 {
     background: #80AEED;
 }
-.graphicon_3, .seat_type_2 {
+.graphicon_2, .seat_type_2, #submit_count_type2 {
     background: #E7EB73;
 }
-.graphicon_4, .seat_type_3 {
+.graphicon_3, .seat_type_3, #submit_count_type3 {
     background: #EBB391;
 }
-.graphicon_5, .seat_type_4 {
+.graphicon_4, .seat_type_4, #submit_count_type4 {
+    background: #C99BE8;
+}
+.graphicon_a, .seat_type_a {
     background: #FF7575;
 }
-.graphicon_6, .seat_type_5 {
+.graphicon_b, .seat_type_b {
     background: #8a8a8a;
 }
-.graphicon_7, .seat_type_6 {
+.graphicon_c, .seat_type_c {
     background: #404040;
 }
 .seat_select {
@@ -86,18 +87,19 @@ div[class^=graphlabel] {
 }
 
 /* Form */
-.showsetting {
+.form_line {
     float: left;
-    font-size: 18px;
-    width: 150px;
-    height: 25px;
-    line-height: 25px;
+    text-align: left;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    margin:5px;
 }
-#isShowType0 { color: #4A4A4A; }
-#isShowType1 { color: #2D1DBF; }
-#isShowType2 { color: #AD882F; }
-#isShowType3 { color: #1A9E2A; }
-#isShowType5 { color: #852FAD; }
+div[id^=submit_count_type] {
+    float: left;
+    width: 50px;
+    margin-right: 20px;
+}
 #submit_occupy, #submit_sale, #submit_clear {
     float: left;
     width: 100px;

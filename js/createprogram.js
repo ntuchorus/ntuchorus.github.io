@@ -4,6 +4,16 @@ var editManagerTable = {};
 var salerTable = {};
 var priceTable = [];
 
+function showPriceSetting(num){
+    for(var i = 0; i < 6; i++){
+        if(i < num)
+            $('.entry_price_type' + i).show();
+        else
+            $('.entry_price_type' + i).hide();
+    }
+    $('.list_price').css('width', 120 + 140 * num);
+}
+
 function inputValidNumber(e, pnumber){
     if(!/\d+$/.test(pnumber))
         $(e).val(/\d+/.exec($(e).val()));
@@ -18,6 +28,8 @@ function inputValidNumber(e, pnumber){
         ticketType = parseInt(e.id.split("input_price_type")[1]);
     else if(e.id.includes('input_price_discount'))
         ticketType = parseInt(e.id.split("input_price_discount")[1]);
+    else if(e.id.includes('input_price_pricenum'))
+        showPriceSetting($(e).val());
     if(ticketType != -1){
         $('#entry_price_type' + ticketType + '_0').html((parseInt($('#input_price_type' + ticketType).val()) * parseInt($('#input_price_discount' + ticketType).val()) / 100) + '元');
         $('#entry_price_type' + ticketType + '_1').html(parseInt($('#input_price_type' + ticketType).val()) + '元');
@@ -53,9 +65,9 @@ function commitCreateProgram(){
             for(var i = 1; i <= 4; i++)
                 dataset['manager'].push({'id': parseInt($('#select_manager_saler_' + i).val()), 'department': i});
             dataset['price'] = [];
-            for(var i = 0; i < 4; i++)
+            for(var i = 0; i < $('#input_price_pricenum').val(); i++)
                 dataset['price'].push({'id': i, 'price': parseInt($('#input_price_type' + i).val()), 'discount': parseInt($('#input_price_discount' + i).val())});
-            dataset['price'].push({'id': 4, 'price': 0, 'discount': 100});
+            dataset['price'].push({'id': $('#input_price_pricenum').val(), 'price': 0, 'discount': 100});
 
             var commit = {'id': fbID, 'token': fbToken, 'cmd': 'creNewProgram', data: dataset};
             connectServer('POST',
@@ -107,15 +119,25 @@ function showData(data) {
         }
     }
 
-    for(var i = 0; i < data['price'].length; i++){
-        $('#input_price_type' + data['price'][i]['id']).val(data['price'][i]['price']);
-        $('#input_price_discount' + data['price'][i]['id']).val(data['price'][i]['discount']);
-        $('#entry_price_type' + data['price'][i]['id'] + '_0').html((data['price'][i]['price'] * data['price'][i]['discount'] / 100) + '元');
-        $('#entry_price_type' + data['price'][i]['id'] + '_1').html(data['price'][i]['price'] + '元');
+    for(var i = 0; i < data['price'].length - 1; i++){
+            $('#input_price_type' + data['price'][i]['id']).val(data['price'][i]['price']);
+            $('#input_price_discount' + data['price'][i]['id']).val(data['price'][i]['discount']);
+            $('#entry_price_type' + data['price'][i]['id'] + '_0').html((data['price'][i]['price'] * data['price'][i]['discount'] / 100) + '元');
+            $('#entry_price_type' + data['price'][i]['id'] + '_1').html(data['price'][i]['price'] + '元');
+    }
+    for(var i = data['price'].length - 1; i < 6; i++){
+            $('#input_price_type' + i).val(0);
+            $('#input_price_discount' + i).val(100);
+            $('#entry_price_type' + i + '_0').html('0元');
+            $('#entry_price_type' + i + '_1').html('0元');
     }
     $('#input_price_program').val(nowCategory['programprice']);
     $('input[id^=input_price_discount]').attr('max', 100);
     $('input[id^=input_price_discount]').attr('min', 0);
+    $('#input_price_pricenum').val(data['price'].length - 1);
+    $('#input_price_pricenum').attr('max', 5);
+    $('#input_price_pricenum').attr('min', 2);
+    showPriceSetting($('#input_price_pricenum').val());
 
     $('#requesting').hide();
     $('#inform_basic').show();

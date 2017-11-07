@@ -38,6 +38,16 @@
                 <select id='select_viewprogram' onchange="programChange(this)"></select>
                 <div id='update_message'></div>
             </div>
+            <!--
+            <div class='floor' id='floor_switch'>
+                <div id='container_switch'>
+                    <form>
+                        <div class="showsetting"><label><input name="displaymode" type="radio" value="0" checked>票單檢視</label></div>
+                        <div class="showsetting"><label><input name="displaymode" type="radio" value="1">個人總計</label></div>
+                    </form>
+                </div>
+            </div>
+            -->
             <div class='floor' id='floor_4'>
                 <div class='floor_label'>四樓</div>
                 <div id='container_4'>
@@ -2933,6 +2943,7 @@
             </div>
             <div class='floor' id='form'>
                 <div id='container_form'>
+                    <div class='form_line' id='submit_count'></div>
                     <div class='form_line'>
                         <div class='form_label'>購票者姓名：</div>
                         <input type="text" id="submit_buyer" readonly/>

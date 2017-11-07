@@ -35,43 +35,39 @@
 
 
 /* Floor 1 */
-.entry_1_type, .entry_1_type_0, .entry_1_type_1, .entry_1_type_2, .entry_1_type_3,
-.entry_1_type_0_total, .entry_1_type_1_total, .entry_1_type_2_total, .entry_1_type_3_total,
-.entry_1_type_0_price, .entry_1_type_1_price, .entry_1_type_2_price, .entry_1_type_3_price, .entry_1_totalprice,
-.entry_1_type_0_rate, .entry_1_type_1_rate, .entry_1_type_2_rate, .entry_1_type_3_rate, .entry_1_totalrate {
+.entry_1_type, .entry_1_type_0, .entry_1_type_1, .entry_1_type_2, .entry_1_type_3, .entry_1_type_4, .entry_1_type_5,
+.entry_1_type_0_total, .entry_1_type_1_total, .entry_1_type_2_total, .entry_1_type_3_total, .entry_1_type_4_total, .entry_1_type_5_total, .entry_1_totalprice,
+.entry_1_type_0_rate, .entry_1_type_1_rate, .entry_1_type_2_rate, .entry_1_type_3_rate, .entry_1_type_4_rate, .entry_1_type_5_rate, .entry_1_totalrate {
     float: left;
     height: 25px;
     line-height: 25px;
 }
     /* Width */
-#container_floor1_label, .container_floor1_data_entry { width: 965px; }
 .entry_1_type { width: 70px; }
-.entry_1_type_0, .entry_1_type_1, .entry_1_type_2, .entry_1_type_3,
-.entry_1_type_0_total, .entry_1_type_1_total, .entry_1_type_2_total, .entry_1_type_3_total { width: 40px; }
-.entry_1_type_0_price, .entry_1_type_1_price, .entry_1_type_2_price, .entry_1_type_3_price, .entry_1_totalprice {
+.entry_1_type_0, .entry_1_type_1, .entry_1_type_2, .entry_1_type_3, .entry_1_type_4, 
+.entry_1_type_0_total, .entry_1_type_1_total, .entry_1_type_2_total, .entry_1_type_3_total, .entry_1_type_4_total, .entry_1_type_5_total { width: 40px; }
+.entry_1_totalprice {
     text-align: right;
     width: 65px;
 }
-.entry_1_type_0_rate, .entry_1_type_1_rate, .entry_1_type_2_rate, .entry_1_type_3_rate, .entry_1_totalrate {
+.entry_1_type_0_rate, .entry_1_type_1_rate, .entry_1_type_2_rate, .entry_1_type_3_rate, .entry_1_type_4_rate, .entry_1_type_5_rate, .entry_1_totalrate {
     text-align: right;
     width: 50px;
 }
-.entry_1_totalprice { text-align: right; }
 
 
 /* Floor 2 */
-.entry_2_date, .entry_2_type_0, .entry_2_type_1, .entry_2_type_2, .entry_2_type_3,
+.entry_2_date, .entry_2_type_0, .entry_2_type_1, .entry_2_type_2, .entry_2_type_3, .entry_2_type_4, .entry_2_type_5,
 .entry_2_discount, .entry_2_totalprice {
     float: left;
     height: 25px;
     line-height: 25px;
 }
     /* Width */
-#container_floor2_label, .container_floor2_data_entry { width: 460px; }
 .entry_2_date { width: 95px; }
-.entry_2_type_0, .entry_2_type_1, .entry_2_type_2, .entry_2_type_3 { width: 55px; }
-.entry_2_discount { width: 55px; }
-.entry_2_totalprice { width: 80px; }
+.entry_2_type_0, .entry_2_type_1, .entry_2_type_2, .entry_2_type_3, .entry_2_type_4, .entry_2_type_5 { width: 40px; }
+.entry_2_discount { width: 50px; }
+.entry_2_totalprice { width: 75px; }
 .entry_2_discount, .entry_2_totalprice { text-align: right; }
 
 
@@ -84,18 +80,17 @@
     padding-bottom 10px;
     margin: 0 auto;
 }
-.entry_4_num, .entry_4_buyer, .entry_4_department, .entry_4_type_0, .entry_4_type_1, .entry_4_type_2, .entry_4_type_3,
+.entry_4_num, .entry_4_buyer, .entry_4_department, .entry_4_type_0, .entry_4_type_1, .entry_4_type_2, .entry_4_type_3, .entry_4_type_4, .entry_4_type_5,
 .entry_4_discount, .entry_4_totalprice, .entry_4_oweprice {
     float: left;
     height: 25px;
     line-height: 25px;
 }
     /* Width */
-#container_floor4_label, .container_floor4_data_entry { width: 730px; }
 .entry_4_num { width: 30px; }
 .entry_4_buyer { width: 150px; }
 .entry_4_department { width: 80px; }
-.entry_4_type_0, .entry_4_type_1, .entry_4_type_2, .entry_4_type_3 { width: 60px; }
+.entry_4_type_0, .entry_4_type_1, .entry_4_type_2, .entry_4_type_3, .entry_4_type_4, .entry_4_type_5 { width: 40px; }
 .entry_4_discount { width: 60px; }
 .entry_4_totalprice, .entry_4_oweprice { width: 80px; }
 .entry_4_num, .entry_4_discount, .entry_4_totalprice, .entry_4_oweprice { text-align: right; }
@@ -111,20 +106,19 @@
     margin: 0 auto;
 }
 .entry_5_num, .entry_5_buyer, .entry_5_department, .entry_5_date, .entry_5_saler,
-.entry_5_type_0, .entry_5_type_1, .entry_5_type_2, .entry_5_type_3,
+.entry_5_type_0, .entry_5_type_1, .entry_5_type_2, .entry_5_type_3, .entry_5_type_4, .entry_5_type_5,
 .entry_5_paymode, .entry_5_discount, .entry_5_totalprice, .entry_5_oweprice {
     float: left;
     height: 25px;
     line-height: 25px;
 }
     /* Width */
-#container_floor5_label, .container_floor5_data_entry { width: 950px; }
 .entry_5_num { width: 30px; }
 .entry_5_buyer { width: 145px; }
 .entry_5_department { width: 80px; }
 .entry_5_date { width: 95px; }
 .entry_5_saler { width: 80px; }
-.entry_5_type_0, .entry_5_type_1, .entry_5_type_2, .entry_5_type_3 { width: 60px; }
+.entry_5_type_0, .entry_5_type_1, .entry_5_type_2, .entry_5_type_3, .entry_5_type_4, .entry_5_type_5 { width: 40px; }
 .entry_5_paymode { width: 50px; }
 .entry_5_discount { width: 60px; }
 .entry_5_totalprice, .entry_5_oweprice { width: 80px; }
@@ -136,6 +130,7 @@
 .entry_1_type_1, .entry_1_type_1_total, .entry_1_type_1_rate, .entry_1_type_1_price, .entry_2_type_1, .entry_4_type_1, .entry_5_type_1 { color: #205EB3; }
 .entry_1_type_2, .entry_1_type_2_total, .entry_1_type_2_rate, .entry_1_type_2_price, .entry_2_type_2, .entry_4_type_2, .entry_5_type_2 { color: #777A09; }
 .entry_1_type_3, .entry_1_type_3_total, .entry_1_type_3_rate, .entry_1_type_3_price, .entry_2_type_3, .entry_4_type_3, .entry_5_type_3 { color: #A14A15; }
+.entry_1_type_4, .entry_1_type_4_total, .entry_1_type_4_rate, .entry_1_type_4_price, .entry_4_type_4, .entry_4_type_4, .entry_4_type_4 { color: #5C1D87; }
 .entry_4_oweprice, .entry_5_oweprice { color: #DE0404; }
 
 

@@ -4,6 +4,7 @@ var priceTable = [];
 var priceDiscountTable = [];
 var salerTable = [];
 var editTicketTable = {};
+var typeSelected = [];
 var priceSelected = 0;
 
 function programChange(e){
@@ -26,6 +27,7 @@ function programChange(e){
     priceDiscountTable = [];
     salerTable = [];
     editTicketTable = {};
+    typeSelected = [];
     priceSelected = 0;
     $('#select_viewprogram').html("");
     getData(nowProgram);
@@ -42,24 +44,37 @@ function inputValidNumber(e, pnumber){
 
 function updateSeat(id) {
     $('#' + id).attr('class', 'seat');
-    if(id in editTicketTable)
+    if(ticketTable[id]['saleid'] != null || ticketTable[id]['preserve'] >= 4)
+        $('#' + id).addClass('seat_type_a');
+    else if(id in editTicketTable)
         $('#' + id).addClass('seat_select');
-    else{
-        $('#' + id).addClass('seat_type_0');
-    }
+    else
+        $('#' + id).addClass('seat_type_' + ticketTable[id]['type']);
+}
+
+function showTypeSelected() {
+    var str = "<div class='form_label'>已選取張數：</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div id='submit_count_type" + i + "'>0</div>";
+    $('#submit_count').html(str);
 }
 
 function select(a) {
     var click_id = a.attr('id');
-    var click_price = priceTable[ticketTable[click_id]['type']] * priceDiscountTable[ticketTable[click_id]['type']] / 100;
+    var click_type = ticketTable[click_id]['type'];
+    var click_price = priceTable[click_type] * priceDiscountTable[click_type] / 100;
     if(ticketTable[click_id]['state'] == 2 && ticketTable[click_id]['saleid'] == null && ticketTable[click_id]['preserve'] < 4){
         if(click_id in editTicketTable){
             delete editTicketTable[click_id];
             priceSelected -= click_price;
+            typeSelected[click_type] -= 1;
+            $('#submit_count_type' + click_type).html(typeSelected[click_type]);
         }
         else{
             editTicketTable[click_id] = 1;
             priceSelected += click_price;
+            typeSelected[click_type] += 1;
+            $('#submit_count_type' + click_type).html(typeSelected[click_type]);
         }
         updateSeat(click_id);
     }
@@ -126,16 +141,18 @@ function showData(data){
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
     $('#update_message').html(nowCategory['message']);
     $('#requesting').hide();
-    $('a[id^=seat_]').attr('class', 'seat seat_type_2');
+    $('a[id^=seat_]').attr('class', 'seat seat_type_b');
 
     for(var i = 0; i < data['price'].length; i++){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
         priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
+        typeSelected[i] = 0;
     }
     for(var i = 0; i < data['progmanager'].length; i++){
         salerTable[data['progmanager'][i]['id']] = data['progmanager'][i]['name'];
         $('#submit_saler select').append('<option value="' + data['progmanager'][i]['id'] + '">' + data['progmanager'][i]['name'] + '</option>\n');
     }
+    showTypeSelected();
 
     for(var i = 0; i < data['ticket'].length; i++){
         var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
@@ -146,12 +163,8 @@ function showData(data){
         arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
         arr['saleid'] = data['ticket'][i]['saleid'];
         ticketTable[seat_id] = arr;
-        if(arr['state'] == 2){
-            if(data['ticket'][i]['saleid'] == null && data['ticket'][i]['preserve'] < 4)
-                $('#' + seat_id).removeClass('seat_type_2').addClass('seat_type_0');
-            else
-                $('#' + seat_id).removeClass('seat_type_2').addClass('seat_type_1');
-        }
+        if(arr['state'] == 2)
+            updateSeat(seat_id);
     }
 
     var dateArr = new Date().toLocaleDateString().split('/');

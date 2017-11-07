@@ -1,12 +1,13 @@
 var nowProgram = -1;
 var ticketTable = {};
 var priceTable = [];
+var preserveTable = {'0': '一般票', '1': '老師票', '2': '友團票', '3': '老人票', '4': 'VIP票', '5': '系統票', '6': '工作席'};
 var priceDiscountTable = [];
 var editTicketTableType = {};
 var editTicketTablePreserve = {};
 var editSelector = 0;
-/* 10: 400  11: 700  12: 1000  13: 1500 14: vip */
-/* 20: none 21: teacher 22: friend 23:old 24: vip 25: system */
+/* 10: 400  11: 700  12: 1000  13: 1500  */
+/* 20: none 21: teacher 22: friend 23:old 24: vip 25: system 26: work */
 
 function programChange(e){
     $('#requesting').html("正在讀取座位圖資訊......");
@@ -30,8 +31,9 @@ function programChange(e){
 
 function pickSelector(a) {
     var id = a.find('div[class^=graphicon_]').attr('class').split('_');
-    if(id[1] == 'type')
-        editSelector = 10 + parseInt(id[2]);
+    if(id[1] == 'type'){
+        editSelector = 10 + parseInt((id[2] == 'v') ? (priceTable.length - 1) : id[2]);
+    }
     else
         editSelector = 20 + parseInt(id[2]);
     return false;
@@ -45,6 +47,8 @@ function updateSeat(id) {
         finalType = editTicketTableType[id];
     if(id in editTicketTablePreserve)
         finalPreserve = editTicketTablePreserve[id];
+    if(finalType == priceTable.length - 1)
+        finalType = 'v';
 
     $('#' + id).attr('class', 'seat');
     if(finalPreserve > 0){
@@ -73,6 +77,31 @@ function updateSeat(id) {
         else
             $('#' + id).addClass('seat_type_b_' + finalType);
     }
+}
+
+function showIconGraph(){
+    var str = "";
+    for(var i in preserveTable){
+        str += "<div class='block_graph'><a href='#'>" +
+                   "<div class='graphicon_preserve_" + i + "'></div>" +
+                   "<div class='graphlabel'>" + preserveTable[i] + "</div>" +
+               "</a></div>";
+    }
+    for(var i = 0; i < priceTable.length - 1; i++){
+        str += "<div class='block_graph'><a href='#'>" +
+                   "<div class='graphicon_type_" + i + "'></div>" +
+                   "<div class='graphlabel_" + i + "'>" + priceTable[i] + "元</div>" +
+               "</a></div>";
+    }
+    str += "<div class='block_graph'><a href='#'>" +
+               "<div class='graphicon_type_v'></div>" +
+               "<div class='graphlabel_v'>VIP</div>" +
+           "</a></div>";
+    $(".container_graph").html(str);
+    $('div[class=block_graph] a').click(function(){
+        pickSelector($(this));
+        return false;
+    });
 }
 
 function showSaleData(box) {
@@ -169,8 +198,8 @@ function showData(data){
     for(var i = 0; i < data['price'].length; i++){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
         priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
-        $('.graphlabel_' + i).html(priceTable[i] + '元');
     }
+    showIconGraph();
 
     for(var i = 0; i < data['ticket'].length; i++){
         var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
@@ -214,35 +243,9 @@ function getData(pid){
 
 $(document).ready(function(){
     fbsdkInitialization(function(){
-        $('a[id^=seat_]').click(function(){
-            select($(this));
-            return false;
-        });
-        $('#submit_clear').click(function(){
-            commitData(0);
-            return false;
-        });
-        $('#submit_occupy').click(function(){
-            commitData(1);
-            return false;
-        });
-        $('#submit_sale').click(function(){
-            commitData(2);
-            return false;
-        });
-    });
-});
-
-
-$(document).ready(function(){
-    fbsdkInitialization(function(){
         getData(nowProgram);
         $('a[id^=seat_]').click(function(){
             select($(this));
-            return false;
-        });
-        $('div[class=block_graph] a').click(function(){
-            pickSelector($(this));
             return false;
         });
         $('#submit_change').click(commitData);

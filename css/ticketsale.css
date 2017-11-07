@@ -22,7 +22,7 @@
 #container_form {
     margin: 0 auto;
     width: 550px;
-    height: 160px;
+    height: 200px;
 }
 #container_submit {
     margin: 0 auto;
@@ -30,9 +30,13 @@
     height: 50px;
 }
 
-.seat_type_0 { background: #BAE89B; }
-.seat_type_1 { background: #8a8a8a; }
-.seat_type_2 { background: #404040; }
+.seat_type_0, #submit_count_type0 { background: #BAE89B; }
+.seat_type_1, #submit_count_type1 { background: #80AEED; }
+.seat_type_2, #submit_count_type2 { background: #E7EB73; }
+.seat_type_3, #submit_count_type3 { background: #EBB391; }
+.seat_type_4, #submit_count_type4 { background: #C99BE8; }
+.seat_type_a { background: #8a8a8a; }
+.seat_type_b { background: #404040; }
 .seat_select { background: #AE00ED; }
 
 
@@ -70,6 +74,11 @@ label {
     font-size: 16px;
     margin:5px;
 }
+div[id^=submit_count_type] {
+    float: left;
+    width: 50px;
+    margin-right: 20px;
+}
 #submit_buyer, #submit_date {
     width: 160px;
     margin-right: 50px;
@@ -78,6 +87,9 @@ label {
     float: left;
     width: 160px;
     margin-right: 50px;
+}
+#submit_paymode label input {
+    margin: 0px 5px 0px 0px;
 }
 #submit_department select, #submit_saler select, #submit_discount {
     width: 90px;

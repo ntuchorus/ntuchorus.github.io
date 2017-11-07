@@ -26,7 +26,7 @@
 }
 .container_graph {
     margin: 0 auto;
-    width: 720px;
+    width: 840px;
     height: 70px;
 }
 
@@ -146,17 +146,20 @@ a {
 .seat_type_1 { background: #80AEED; }
 .seat_type_2 { background: #E7EB73; }
 .seat_type_3 { background: #EBB391; }
-.seat_type_4 { background: #FFA6B2; }
+.seat_type_4 { background: #C99BE8; }
+.seat_type_v { background: #FFA6B2; }
 .seat_type_b_0 { border-color: #BAE89B; }
 .seat_type_b_1 { border-color: #80AEED; }
 .seat_type_b_2 { border-color: #E7EB73; }
 .seat_type_b_3 { border-color: #EBB391; }
-.seat_type_b_4 { border-color: #FFA6B2; }
+.seat_type_b_4 { border-color: #C99BE8; }
+.seat_type_b_v { border-color: #FFA6B2; }
 .seat_preserve_1 { border-color: #2D1DBF; }
 .seat_preserve_2 { border-color: #AD882F; }
 .seat_preserve_3 { border-color: #1A9E2A; }
-.seat_preserve_4 { border-color: #BF3F50; }
+.seat_preserve_4 { border-color: #D75067; }
 .seat_preserve_5 { border-color: #852FAD; }
+.seat_preserve_6 { border-color: #050505; }
 .seat_state_1 { background: #FF7575; }
 .seat_state_2 { background: #8a8a8a; }
 .seat_state_b_1 { border-color: #FF7575; }
@@ -191,13 +194,15 @@ div[class^=graphlabel] {
 .graphicon_type_1 { background: #80AEED; }
 .graphicon_type_2 { background: #E7EB73; }
 .graphicon_type_3 { background: #EBB391; }
-.graphicon_type_4 { background: #FFA6B2; }
+.graphicon_type_4 { background: #C99BE8; }
+.graphicon_type_v { background: #FFA6B2; }
 .graphicon_preserve_0 { background: #BAE89B; }
 .graphicon_preserve_1 { background: #2D1DBF; }
 .graphicon_preserve_2 { background: #AD882F; }
 .graphicon_preserve_3 { background: #1A9E2A; }
 .graphicon_preserve_4 { background: #BF3F50; }
 .graphicon_preserve_5 { background: #852FAD; }
+.graphicon_preserve_6 { background: #050505; }
 .showsetting {
     margin: 0 auto;
     padding-top: 15px;

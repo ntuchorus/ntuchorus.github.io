@@ -38,74 +38,109 @@ function programChange(e){
     getData(nowProgram);
 }
 
+function showFloor1Head(){
+    var str = "<div class='entry_1_type'>票種</div>"
+    for(var i = 0; i < priceTable.length - 1; i++){
+        str += "<div class='entry_1_type_" + i + "'></div>" +
+               "<div class='entry_1_type_" + i + "_total'>總數</div>" +
+               "<div class='entry_1_type_" + i + "_rate'>售票率</div>";
+    }
+    str += "<div class='entry_1_totalrate'>售票率</div>" +
+           "<div class='entry_1_totalprice'>銷售額</div>";
+    $('#container_floor1_label').html(str);
+}
 function showFloor1Entry(num, entry){
-    var sale = entry['type0'] + entry['type1'] +  entry['type2'] + entry['type3'];
-    var total = entry['type0_total'] + entry['type1_total'] +  entry['type2_total'] + entry['type3_total'];
-    $('#container_floor1_data').append("<div class='list_entry container_floor1_data_entry'>" +
-                                           "<div class='entry_1_type'>" + preserveTable[num] + "</div>" +
-                                           "<div class='entry_1_type_0'>" + (entry['type0'] == 0 ? "" : entry['type0']) + "</div>" +
-                                           "<div class='entry_1_type_0_total'>" + (entry['type0_total'] == 0 ? "" : entry['type0_total']) + "</div>" +
-                                           "<div class='entry_1_type_0_rate'>" + (entry['type0_total'] == 0 ? "" : (entry['type0'] / entry['type0_total'] * 100).toFixed(1) + '%') + "</div>" +
-                                           "<div class='entry_1_type_0_price'>" + (entry['type0_price'] == 0 ? "" : entry['type0_price']) + "</div>" +
-                                           "<div class='entry_1_type_1'>" + (entry['type1'] == 0 ? "" : entry['type1']) + "</div>" +
-                                           "<div class='entry_1_type_1_total'>" + (entry['type1_total'] == 0 ? "" : entry['type1_total']) + "</div>" +
-                                           "<div class='entry_1_type_1_rate'>" + (entry['type1_total'] == 0 ? "" : (entry['type1'] / entry['type1_total'] * 100).toFixed(1) + '%') + "</div>" +
-                                           "<div class='entry_1_type_1_price'>" + (entry['type1_price'] == 0 ? "" : entry['type1_price']) + "</div>" +
-                                           "<div class='entry_1_type_2'>" + (entry['type2'] == 0 ? "" : entry['type2']) + "</div>" +
-                                           "<div class='entry_1_type_2_total'>" + (entry['type2_total'] == 0 ? "" : entry['type2_total']) + "</div>" +
-                                           "<div class='entry_1_type_2_rate'>" + (entry['type2_total'] == 0 ? "" : (entry['type2'] / entry['type2_total'] * 100).toFixed(1) + '%') + "</div>" +
-                                           "<div class='entry_1_type_2_price'>" + (entry['type2_price'] == 0 ? "" : entry['type2_price']) + "</div>" +
-                                           "<div class='entry_1_type_3'>" + (entry['type3'] == 0 ? "" : entry['type3']) + "</div>" +
-                                           "<div class='entry_1_type_3_total'>" + (entry['type3_total'] == 0 ? "" : entry['type3_total']) + "</div>" +
-                                           "<div class='entry_1_type_3_rate'>" + (entry['type3_total'] == 0 ? "" : (entry['type3'] / entry['type3_total'] * 100).toFixed(1) + '%') + "</div>" +
-                                           "<div class='entry_1_type_3_price'>" + (entry['type3_price'] == 0 ? "" : entry['type3_price']) + "</div>" +
-                                           "<div class='entry_1_totalrate'>" + (total == 0 ? "" : (sale / total * 100).toFixed(1) + '%') + "</div>" +
-                                           "<div class='entry_1_totalprice'>" + entry['totalprice'] + "</div>" +
-                                       "</div>");
+    var sale = 0;
+    var total = 0;
+    var str = "<div class='list_entry container_floor1_data_entry'>" +
+                  "<div class='entry_1_type'>" + preserveTable[num] + "</div>";
+    for(var i = 0; i < priceTable.length - 1; i++){
+        sale += entry['type' + i];
+        total += entry['type' + i + '_total'];
+        str += "<div class='entry_1_type_" + i + "'>" + (entry['type' + i] == 0 ? "" : entry['type' + i]) + "</div>" +
+               "<div class='entry_1_type_" + i + "_total'>" + (entry['type' + i + '_total'] == 0 ? "" : entry['type' + i + '_total']) + "</div>" +
+               "<div class='entry_1_type_" + i + "_rate'>" + (entry['type' + i + '_total'] == 0 ? "" : (entry['type' + i] / entry['type' + i + '_total'] * 100).toFixed(1) + '%') + "</div>";
+    }
+    str += "<div class='entry_1_totalrate'>" + (total == 0 ? "" : (sale / total * 100).toFixed(1) + '%') + "</div>" +
+           "<div class='entry_1_totalprice'>" + entry['totalprice'] + "</div>" +
+           "</div>";
+    $('#container_floor1_data').append(str);
 }
 
-function showFloor2Entry(i, entry){
-    $('#container_floor2_' + i + '_data').append("<div class='list_entry container_floor2_data_entry'>" +
-                                                     "<div class='entry_2_date'>" + entry['date'] + "</div>" +
-                                                     "<div class='entry_2_type_0'>" + (entry['type0'] == 0 ? "" : entry['type0']) + "</div>" +
-                                                     "<div class='entry_2_type_1'>" + (entry['type1'] == 0 ? "" : entry['type1']) + "</div>" +
-                                                     "<div class='entry_2_type_2'>" + (entry['type2'] == 0 ? "" : entry['type2']) + "</div>" +
-                                                     "<div class='entry_2_type_3'>" + (entry['type3'] == 0 ? "" : entry['type3']) + "</div>" +
-                                                     "<div class='entry_2_discount'>" + (entry['discount'] == 0 ? "" : entry['discount']) + "</div>" +
-                                                     "<div class='entry_2_totalprice'>" + entry['totalprice'] + "</div>" +
-                                                 "</div>");
+function showFloor2Head(){
+    var str = "<div class='entry_2_date'>日期</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div class='entry_2_type_" + i + "'></div>";
+    str += "<div class='entry_2_discount'>折扣</div>" +
+           "<div class='entry_2_totalprice'>總價</div>";
+    $('#container_floor2_1_label').html(str);
+    $('#container_floor2_2_label').html(str);
+}
+function showFloor2Entry(sub, entry){
+    var str = "<div class='list_entry container_floor2_data_entry'>" +
+              "<div class='entry_2_date'>" + entry['date'] + "</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div class='entry_2_type_" + i + "'>" + (entry['type' + i] == 0 ? "" : entry['type' + i]) + "</div>";
+    str += "<div class='entry_2_discount'>" + (entry['discount'] == 0 ? "" : entry['discount']) + "</div>" +
+           "<div class='entry_2_totalprice'>" + entry['totalprice'] + "</div>" +
+           "</div>";
+    $('#container_floor2_' + sub + '_data').append(str);
 }
 
+function showFloor4Head(){
+    var str = "<div class='entry_4_num'>#</div>" + 
+              "<div class='entry_4_buyer'>姓名</div>" +
+              "<div class='entry_4_department'>聲部</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div class='entry_4_type_" + i + "'></div>";
+    str += "<div class='entry_4_discount'>折扣</div>" +
+           "<div class='entry_4_totalprice'>總價</div>" +
+           "<div class='entry_4_oweprice'>欠款</div>";
+    $('#container_floor4_label').html(str);
+}
 function showFloor4Entry(num, entry){
-    $('#container_floor4_data').append("<div class='list_entry container_floor4_data_entry'>" +
-                                           "<div class='entry_4_num'>" + num + "</div>" +
-                                           "<div class='entry_4_buyer'>" + entry['buyer'] + "</div>" +
-                                           "<div class='entry_4_department'>" + departmentTable[entry['department']] + "</div>" +
-                                           "<div class='entry_4_type_0'>" + (entry['type0'] == 0 ? "" : entry['type0']) + "</div>" +
-                                           "<div class='entry_4_type_1'>" + (entry['type1'] == 0 ? "" : entry['type1']) + "</div>" +
-                                           "<div class='entry_4_type_2'>" + (entry['type2'] == 0 ? "" : entry['type2']) + "</div>" +
-                                           "<div class='entry_4_type_3'>" + (entry['type3'] == 0 ? "" : entry['type3']) + "</div>" +
-                                           "<div class='entry_4_discount'>" + (entry['discount'] == 0 ? "" : entry['discount']) + "</div>" +
-                                           "<div class='entry_4_totalprice'>" + entry['totalprice'] + "</div>" +
-                                           "<div class='entry_4_oweprice'>" + (entry['oweprice'] == 0 ? "" : entry['oweprice']) + "</div>" +
-                                       "</div>");
+    var str = "<div class='list_entry container_floor4_data_entry'>" +
+                  "<div class='entry_4_num'>" + num + "</div>" +
+                  "<div class='entry_4_buyer'>" + entry['buyer'] + "</div>" +
+                  "<div class='entry_4_department'>" + departmentTable[entry['department']] + "</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div class='entry_4_type_" + i + "'>" + (entry['type' + i] == 0 ? "" : entry['type' + i]) + "</div>";
+    str += "<div class='entry_4_discount'>" + (entry['discount'] == 0 ? "" : entry['discount']) + "</div>" +
+           "<div class='entry_4_totalprice'>" + entry['totalprice'] + "</div>" +
+           "<div class='entry_4_oweprice'>" + (entry['oweprice'] == 0 ? "" : entry['oweprice']) + "</div>" +
+           "</div>";
+    $('#container_floor4_data').append(str);
+}
+
+function showFloor5Head(){
+    var str = "<div class='entry_5_num'>#</div>" + 
+              "<div class='entry_5_buyer'>姓名</div>" +
+              "<div class='entry_5_department'>聲部</div>" +
+              "<div class='entry_5_date'>售票日期</div>" +
+              "<div class='entry_5_saler'>負責人</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div class='entry_5_type_" + i + "'></div>";
+    str += "<div class='entry_5_paymode'>模式</div>" +
+           "<div class='entry_5_discount'>折扣</div>" +
+           "<div class='entry_5_totalprice'>總價</div>" +
+           "<div class='entry_5_oweprice'>欠款</div>";
+    $('#container_floor5_label').html(str);
 }
 function showFloor5Entry(num, entry){
-    $('#container_floor5_data').append("<div class='list_entry container_floor5_data_entry'>" +
-                                           "<div class='entry_5_num'>" + num + "</div>" +
-                                           "<div class='entry_5_buyer'>" + entry['buyer'] + "</div>" +
-                                           "<div class='entry_5_department'>" + departmentTable[entry['department']] + "</div>" +
-                                           "<div class='entry_5_date'>" + entry['date'] + "</div>" +
-                                           "<div class='entry_5_saler'>" + salerTable[entry['saler']] + "</div>" +
-                                           "<div class='entry_5_type_0'>" + (entry['type0'] == 0 ? "" : entry['type0']) + "</div>" +
-                                           "<div class='entry_5_type_1'>" + (entry['type1'] == 0 ? "" : entry['type1']) + "</div>" +
-                                           "<div class='entry_5_type_2'>" + (entry['type2'] == 0 ? "" : entry['type2']) + "</div>" +
-                                           "<div class='entry_5_type_3'>" + (entry['type3'] == 0 ? "" : entry['type3']) + "</div>" +
-                                           "<div class='entry_5_paymode'>" + paymodeTable[entry['paymode']] + "</div>" +
-                                           "<div class='entry_5_discount'>" + (entry['discount'] == 0 ? "" : entry['discount']) + "</div>" +
-                                           "<div class='entry_5_totalprice'>" + entry['totalprice'] + "</div>" +
-                                           "<div class='entry_5_oweprice'>" + (entry['oweprice'] == 0 ? "" : entry['oweprice']) + "</div>" +
-                                       "</div>");
+    var str = "<div class='list_entry container_floor5_data_entry'>" +
+              "<div class='entry_5_num'>" + num + "</div>" +
+              "<div class='entry_5_buyer'>" + entry['buyer'] + "</div>" +
+              "<div class='entry_5_department'>" + departmentTable[entry['department']] + "</div>" +
+              "<div class='entry_5_date'>" + entry['date'] + "</div>" +
+              "<div class='entry_5_saler'>" + salerTable[entry['saler']] + "</div>";
+    for(var i = 0; i < priceTable.length - 1; i++)
+        str += "<div class='entry_5_type_" + i + "'>" + (entry['type' + i] == 0 ? "" : entry['type' + i]) + "</div>";
+    str += "<div class='entry_5_paymode'>" + paymodeTable[entry['paymode']] + "</div>" +
+           "<div class='entry_5_discount'>" + (entry['discount'] == 0 ? "" : entry['discount']) + "</div>" +
+           "<div class='entry_5_totalprice'>" + entry['totalprice'] + "</div>" +
+           "<div class='entry_5_oweprice'>" + (entry['oweprice'] == 0 ? "" : entry['oweprice']) + "</div>" +
+           "</div>";
+    $('#container_floor5_data').append(str);
 }
 
 function sortFloor4Total(a, b){
@@ -125,6 +160,7 @@ function relistFloor4(method){
     data_floor4.sort(method);
     for(var i = 0; i < data_floor4.length; i++)
         showFloor4Entry(i + 1, data_floor4[i]);
+    $('.container_floor4_data_entry').css('width', 490 + (priceTable.length - 1) * 40);
 }
 function sortFloor5Id(a, b){
     return a['id'] - b['id'];
@@ -140,6 +176,7 @@ function relistFloor5(method){
     data_floor5.sort(method);
     for(var i = 0; i < data_floor5.length; i++)
         showFloor5Entry(i + 1, data_floor5[i]);
+    $('.container_floor5_data_entry').css('width', 710 + (priceTable.length - 1) * 40);
 }
 
 
@@ -167,12 +204,20 @@ function showData(data){
     }
 
     /* Floor 1 table */
-    for(var i = 0; i < 4; i++)
-        $('.entry_1_type_' + i).html(priceTable[i]); 
-    var data_floor1_total = {'type0': 0, 'type0_total': 0, 'type0_price': 0,  'type1': 0, 'type1_total': 0, 'type1_price': 0,  'type2': 0, 'type2_total': 0, 'type2_price': 0,  'type3': 0, 'type3_total': 0, 'type3_price': 0, 'totalprice': 0};
+    showFloor1Head();
+    var data_floor1_total = {'totalprice': 0};
+    for(var i = 0; i < data['price'].length - 1; i++){
+        $('.entry_1_type_' + i).html(priceTable[i]);
+        data_floor1_total['type' + i] = 0;
+        data_floor1_total['type' + i + '_total'] = 0;
+    }
     for(var i = 0; i < 6; i++){
         if(i != 4){
-            var insert = {'type0': 0, 'type0_total': 0, 'type0_price': 0,  'type1': 0, 'type1_total': 0, 'type1_price': 0,  'type2': 0, 'type2_total': 0, 'type2_price': 0,  'type3': 0, 'type3_total': 0, 'type3_price': 0, 'totalprice': 0};
+            var insert = {'totalprice': 0};
+            for(var j = 0; j < data['price'].length - 1; j++){
+                insert['type' + j] = 0;
+                insert['type' + j + '_total'] = 0;
+            }
             data_floor1[i] = insert;
         }
     }
@@ -185,9 +230,7 @@ function showData(data){
                 var price = insert['num'] * priceTable[insert['type']];
                 if(insert['preserve'] != 5)
                     price *= priceDiscountTable[insert['type']] / 100;
-                data_floor1[insert['preserve']]['type' + insert['type'] + '_price'] += price;
                 data_floor1[insert['preserve']]['totalprice'] += price;
-                data_floor1_total['type' + insert['type'] + '_price'] += price;
                 data_floor1_total['totalprice'] += price;
             }
             data_floor1[insert['preserve']]['type' + insert['type'] + '_total'] += insert['num'];
@@ -198,20 +241,24 @@ function showData(data){
     Object.keys(data_floor1).forEach(function(key, idx) {
         showFloor1Entry(key, data_floor1[key]);
     });
+    $('#container_floor1_label').css('width', 195 + (data['price'].length - 1) * 130);
+    $('.container_floor1_data_entry').css('width', 195 + (data['price'].length - 1) * 130);
 
     /* Floor 2 table */
-    var data_floor2_total_1 = {'date': '總計', 'type0': 0, 'type1': 0, 'type2': 0, 'type3': 0, 'discount': 0, 'totalprice': 0};
-    var data_floor2_total_2 = {'date': '總計', 'type0': 0, 'type1': 0, 'type2': 0, 'type3': 0, 'discount': 0, 'totalprice': 0};
-    for(var i = 0; i < 4; i++)
-        $('.entry_2_type_' + i).html(priceTable[i] + '元'); 
+    showFloor2Head();
+    var data_floor2_total_1 = {'date': '總計', 'discount': 0, 'totalprice': 0};
+    var data_floor2_total_2 = {'date': '總計', 'discount': 0, 'totalprice': 0};
+    for(var i = 0; i < data['price'].length - 1; i++){
+        $('.entry_2_type_' + i).html(priceTable[i]);
+        data_floor2_total_1['type' + i] = 0;
+        data_floor2_total_2['type' + i] = 0;
+    }
     for(var i = 0; i < data['queryString_2a'].length; i++){
         var insert = data['queryString_2a'][i];
         insert['discount'] = data['queryString_2c'][i]['discount'];
         insert['totalprice'] -= data['queryString_2c'][i]['discount'];
-        data_floor2_total_1['type0'] += insert['type0'];
-        data_floor2_total_1['type1'] += insert['type1'];
-        data_floor2_total_1['type2'] += insert['type2'];
-        data_floor2_total_1['type3'] += insert['type3'];
+        for(var j = 0; j < data['price'].length - 1; j++)
+            data_floor2_total_1['type' + j] += insert['type' + j];
         data_floor2_total_1['discount'] += insert['discount'];
         data_floor2_total_1['totalprice'] += insert['totalprice'];
         data_floor2_1.push(insert);
@@ -222,25 +269,26 @@ function showData(data){
         var insert = data['queryString_2b'][i];
         insert['discount'] = data['queryString_2d'][i]['discount'];
         insert['totalprice'] -= data['queryString_2d'][i]['discount'];
-        data_floor2_total_2['type0'] += insert['type0'];
-        data_floor2_total_2['type1'] += insert['type1'];
-        data_floor2_total_2['type2'] += insert['type2'];
-        data_floor2_total_2['type3'] += insert['type3'];
+        for(var j = 0; j < data['price'].length - 1; j++)
+            data_floor2_total_2['type' + j] += insert['type' + j];
         data_floor2_total_2['discount'] += insert['discount'];
         data_floor2_total_2['totalprice'] += insert['totalprice'] - insert['discount'];
         data_floor2_2.push(insert);
         showFloor2Entry(2, insert);
     }
     showFloor2Entry(2, data_floor2_total_2);
-
+    $('.container_floor2_sub').css('width', 230 + (data['price'].length - 1) * 40);
+    $('#container_floor2_1_sub').css('margin-left', 255 - (data['price'].length - 1) * 40);
+    $('#container_floor2_2_sub').css('margin-right', 255 - (data['price'].length - 1) * 40);
     $('.container_floor2_sub').height(97 + Math.max(data_floor2_1.length, data_floor2_2.length) * 26);
     $('#floor_statistic_2').height(157 + Math.max(data_floor2_1.length, data_floor2_2.length) * 26);
 
     /* Floor 4 table */
+    showFloor4Head();
     var data_floor4_creditlist = {};
     var data_floor4_discountlist = {};
-    for(var i = 0; i < 4; i++)
-        $('.entry_4_type_' + i).html(priceTable[i] + '元'); 
+    for(var i = 0; i < data['price'].length - 1; i++)
+        $('.entry_4_type_' + i).html(priceTable[i]); 
     for(var i = 0; i < data['queryString_4b'].length; i++)
         data_floor4_creditlist[data['queryString_4b'][i]['buyer']] = data['queryString_4b'][i]['price'];
     for(var i = 0; i < data['queryString_4c'].length; i++)
@@ -254,11 +302,13 @@ function showData(data){
         data_floor4.push(insert);
     }
     relistFloor4(sortFloor4Total);
+    $('#container_floor4_label').css('width', 490 + (data['price'].length - 1) * 40);
 
     /* Floor 5 table */
+    showFloor5Head();
     var data_floor5_creditlist = {};
-    for(var i = 0; i < 4; i++)
-        $('.entry_5_type_' + i).html(priceTable[i] + '元'); 
+    for(var i = 0; i < data['price'].length - 1; i++)
+        $('.entry_5_type_' + i).html(priceTable[i]); 
     for(var i = 0; i < data['queryString_5b'].length; i++)
         data_floor5_creditlist[data['queryString_5b'][i]['saleid']] = data['queryString_5b'][i]['price'];
     for(var i = 0; i < data['queryString_5a'].length; i++){
@@ -269,6 +319,7 @@ function showData(data){
         data_floor5.push(insert);
     }
     relistFloor5(sortFloor5Id);
+    $('#container_floor5_label').css('width', 710 + (data['price'].length - 1) * 40);
 
     $('#requesting').hide();
     $('#switcher').show();

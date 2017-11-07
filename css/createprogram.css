@@ -71,8 +71,8 @@ select {
 }
 
 /* price */
-.list_price { width: 680px; }
-#list_label_program { width: 260; }
+#list_label_program { width: 210px; }
+#list_label_pricenum { width: 210px; }
 .label_price {
     float: left;
     width: 120px;
@@ -91,10 +91,12 @@ select {
 input[id^=input_price_type], input[id^=input_price_discount] {
     margin-left: 40px;
 }
+#input_price_program, #input_price_pricenum{ width: 50px; }
 .entry_price_type0 { color: #42910D; }
 .entry_price_type1 { color: #205EB3; }
 .entry_price_type2 { color: #777A09; }
 .entry_price_type3 { color: #A14A15; }
+.entry_price_type4 { color: #5C1D87; }
 
 /* submit */
 #entry_submit {
