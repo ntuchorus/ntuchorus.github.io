@@ -272,7 +272,7 @@ function showData(data){
         for(var j = 0; j < data['price'].length - 1; j++)
             data_floor2_total_2['type' + j] += insert['type' + j];
         data_floor2_total_2['discount'] += insert['discount'];
-        data_floor2_total_2['totalprice'] += insert['totalprice'] - insert['discount'];
+        data_floor2_total_2['totalprice'] += insert['totalprice'];
         data_floor2_2.push(insert);
         showFloor2Entry(2, insert);
     }
@@ -286,16 +286,25 @@ function showData(data){
     /* Floor 4 table */
     showFloor4Head();
     var data_floor4_creditlist = {};
-    var data_floor4_discountlist = {};
+    var data_floor4_discountlist = [{}, {}];
     for(var i = 0; i < data['price'].length - 1; i++)
         $('.entry_4_type_' + i).html(priceTable[i]); 
     for(var i = 0; i < data['queryString_4b'].length; i++)
         data_floor4_creditlist[data['queryString_4b'][i]['buyer']] = data['queryString_4b'][i]['price'];
-    for(var i = 0; i < data['queryString_4c'].length; i++)
-        data_floor4_discountlist[data['queryString_4c'][i]['buyer']] = data['queryString_4c'][i]['discount'];
+    for(var i = 0; i < data['queryString_4c'].length; i++){
+        if(data['queryString_4c'][i]['buyer'] in data_floor4_discountlist[data['queryString_4c'][i]['paymode']])
+            data_floor4_discountlist[data['queryString_4c'][i]['paymode']][data['queryString_4c'][i]['buyer']] += data['queryString_4c'][i]['discount'];
+        else
+            data_floor4_discountlist[data['queryString_4c'][i]['paymode']][data['queryString_4c'][i]['buyer']] = data['queryString_4c'][i]['discount'];
+    }
     for(var i = 0; i < data['queryString_4a'].length; i++){
         var insert = data['queryString_4a'][i];
-        insert['discount'] = data_floor4_discountlist[insert['buyer']];
+        if(insert['buyer'] in data_floor4_discountlist[0])
+            insert['discount'] += data_floor4_discountlist[0][insert['buyer']];
+        if(insert['buyer'] in data_floor4_discountlist[1]){
+            insert['discount'] += data_floor4_discountlist[1][insert['buyer']];
+            insert['oweprice'] -= data_floor4_discountlist[1][insert['buyer']];
+        }
         insert['totalprice'] -= insert['discount'];
         if(insert['buyer'] in data_floor4_creditlist)
             insert['oweprice'] -= data_floor4_creditlist[insert['buyer']];
@@ -314,6 +323,8 @@ function showData(data){
     for(var i = 0; i < data['queryString_5a'].length; i++){
         var insert = data['queryString_5a'][i];
         insert['totalprice'] -= insert['discount'];
+        if(insert['paymode'] == 1)
+            insert['oweprice'] -= insert['discount'];
         if(insert['id'] in data_floor5_creditlist)
             insert['oweprice'] -= data_floor5_creditlist[insert['id']];
         data_floor5.push(insert);
