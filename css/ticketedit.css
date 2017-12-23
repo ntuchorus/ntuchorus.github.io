@@ -1,0 +1,113 @@
+/* Visibility Init */
+#message, #floor_credit, #floor_payment {
+    display: none;
+    color: #4A4A4A;
+}
+
+.list_head {
+    height: 30px;
+    line-height: 30px;
+}
+
+#container_floor_credit_button, #container_floor_payment_button {
+    clear: both;
+    width: 260px;
+    height: 50px;
+    line-height: 40px;
+    padding-bottom 10px;
+    margin: 0 auto;
+}
+.entry_credit_content, .entry_payment_content {
+    clear: both;
+    height: 30px;
+    line-height: 30px;
+}
+.entry_credit_form, .entry_payment_form {
+    clear: both;
+    height: 30px;
+    line-height: 30px;
+}
+.entry_credit_form {
+    width: 520px;
+    margin-left: 240px;
+}
+.entry_payment_form {
+    width: 545px;
+    margin-left: 220px;
+}
+
+
+
+
+.entry_num, .entry_buyer, .entry_department, .entry_date, .entry_saler,
+.entry_type_0, .entry_type_1, .entry_type_2, .entry_type_3, .entry_type_4, .entry_type_5,
+.entry_paymode, .entry_discount, .entry_totalprice, .entry_oweprice,
+.entry_submit_date, .entry_submit_price, .entry_submit_button, .entry_date_label, .entry_totalprice_label {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+    /* Width */
+.entry_num { width: 30px; }
+.entry_buyer { width: 145px; }
+.entry_department { width: 80px; }
+.entry_date { width: 95px; }
+.entry_saler { width: 80px; }
+.entry_type_0, .entry_type_1, .entry_type_2, .entry_type_3, .entry_type_4, .entry_type_5 { width: 40px; }
+.entry_paymode { width: 50px; }
+.entry_discount { width: 60px; }
+.entry_totalprice, .entry_oweprice { width: 60px; }
+.entry_num, .entry_discount, .entry_totalprice, .entry_oweprice { text-align: right; }
+.entry_date_label, .entry_totalprice_label { width: 100px; margin-left: 30px;}
+.entry_submit_date { width: 250px; }
+.entry_submit_price { width: 170px; }
+.entry_submit_button { width: 60px; }
+
+/* Color */
+.entry_type_0 { color: #42910D; }
+.entry_type_1 { color: #205EB3; }
+.entry_type_2 { color: #777A09; }
+.entry_type_3 { color: #A14A15; }
+.entry_type_4 { color: #5C1D87; }
+.entry_oweprice { color: #DE0404; }
+a[id^=button_submit_] { background: #9FEDA5; margin-left: 50px; }
+a[id^=button_submit_]:hover { background: #75EB7F; }
+a[id^=button_delete_payment_] { background: #FFB0B0; margin-left: 10px; }
+a[id^=button_delete_payment_]:hover { background: #FF8C8C; }
+a[id^=button_delete_credit_] { background: #E8B3FF; margin-left: 50px; }
+a[id^=button_delete_credit_]:hover { background: #D980FF; }
+#button_credit_sort_id:hover, #button_credit_sort_date:hover, #button_payment_sort_id:hover, #button_payment_sort_date:hover { background: #cccccc; }
+
+/* Form */
+input {
+    color: #3B3B3B;
+    font-family: "Calibri", "Heiti TC", "微軟正黑體";
+    font-size: 100%;
+    height: 24px;
+    line-height: 24px;
+    border: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 3px 0 3px 0;
+}
+#button_credit_sort_id, #button_credit_sort_date, #button_payment_sort_id, #button_payment_sort_date {
+    float: left;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 5px 0 5px;
+    font-size: 20px;
+    color: #3B3B3B;
+    background: #e0e0e0;
+}
+a[id^=button_submit_], a[id^=button_delete_] {
+    float: left;
+    width: 50px;
+    height: 24px;
+    line-height: 24px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: #3B3B3B;
+}
+input[id^=input_submit_date_] { width: 160px; }
+input[id^=input_submit_price_] { width: 80px; }

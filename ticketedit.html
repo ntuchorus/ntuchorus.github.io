@@ -9,7 +9,7 @@
         <link href="css/ticketedit.css" rel="stylesheet" type="text/css" />
         <link href="css/menu.css" rel="stylesheet" type="text/css" />
         <link href="css/typeset.css" rel="stylesheet" type="text/css" />
-        <link href="css/seat.css" rel="stylesheet" type="text/css" />
+        <link href="css/list.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
@@ -25,13 +25,36 @@
                     <li><a class="menubutton" id="menubutton_6_on" href="ticketedit.html">訂單編輯</a></li>
                     <li><a class="menubutton" id="menubutton_7" href="ticketmap.html">售票地圖</a></li>
                     <li><a class="menubutton" id="menubutton_8" href="statistics.html">統計報表</a></li>
-                    <li id="menumanager"></li>
+                    <li id="menumanager">驗證Facebook...</li>
                 </ul>
             </div>
         </div>
         <div id='content'>
             <div class='floor' id='requesting'>
-                頁面未完成
+                正在讀取座位圖資訊......
+            </div>
+            <div class='floor' id='message'>
+                <div id='update_date'></div>
+                <select id='select_viewprogram' onchange="programChange(this)"></select>
+                <div id='update_message'></div>
+            </div>
+            <div class='floor' id='floor_credit'>
+                <div class='floor_label'>賒帳付款</div>
+                <div id='container_floor_credit_button'>
+                    <a id='button_credit_sort_id' href='#'>建檔排序</a>
+                    <a id='button_credit_sort_date' href='#'>日期排序</a>
+                </div>
+                <div class='list_head' id='container_floor_credit_label'></div>
+                <div id='container_floor_credit_data'></div>
+            </div>
+            <div class='floor' id='floor_payment'>
+                <div class='floor_label'>票單刪除</div>
+                <div id='container_floor_payment_button'>
+                    <a id='button_payment_sort_id' href='#'>建檔排序</a>
+                    <a id='button_payment_sort_date' href='#'>日期排序</a>
+                </div>
+                <div class='list_head' id='container_floor_payment_label'></div>
+                <div id='container_floor_payment_data'></div>
             </div>
         </div>
     </body>
