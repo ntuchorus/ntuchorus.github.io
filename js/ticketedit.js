@@ -163,26 +163,28 @@ function commitAddCredit(button){
 function commitDelete(button){
     var id = button.attr('id').split("_");
     var cmd = "";
-    if(id[2] == 'credit')
-        cmd = 'delCreditPay';
-    else if(id[2] == 'payment')
-        cmd = 'delSaleTicket';
-    var dataset = {};
-    dataset['id'] = parseInt(id[3]);
-    fbsdkCheckLogin(function(fbID, fbToken){
-        var commit = {'id': fbID, 'token': fbToken, 'cmd': cmd, 'data': dataset, 'programid': nowProgram};
-        connectServer('POST',
-                      JSON.stringify(commit),
-                      'delete',
-                      function(data){
-            if(data["status"] == "0")
-                window.location.reload();
-            else if(data["status"] == "2")
-                alert('權限不足，僅該場音樂會的票務團秘可以刪除售票付款記錄');
-            else
-                alert('寫入失敗，請稍候再試或聯絡管理員');
+    if(confirm('請注意，刪除無法復原，確定刪除？')) {
+        if(id[2] == 'credit')
+            cmd = 'delCreditPay';
+        else if(id[2] == 'payment')
+            cmd = 'delSaleTicket';
+        var dataset = {};
+        dataset['id'] = parseInt(id[3]);
+        fbsdkCheckLogin(function(fbID, fbToken){
+            var commit = {'id': fbID, 'token': fbToken, 'cmd': cmd, 'data': dataset, 'programid': nowProgram};
+            connectServer('POST',
+                          JSON.stringify(commit),
+                          'delete',
+                          function(data){
+                if(data["status"] == "0")
+                    window.location.reload();
+                else if(data["status"] == "2")
+                    alert('權限不足，僅該場音樂會的票務團秘可以刪除售票付款記錄');
+                else
+                    alert('寫入失敗，請稍候再試或聯絡管理員');
+            });
         });
-    });
+    }
     return false;
 }
 
