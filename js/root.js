@@ -6,6 +6,8 @@ var salerTable = {};
 function inputValidNumber(e, pnumber){
     if(!/\d+$/.test(pnumber))
         $(e).val(/\d+/.exec($(e).val()));
+    if($(e).val() == '')
+        $(e).val('0');
     return false;
 }
 
