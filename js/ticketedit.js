@@ -119,6 +119,7 @@ function relistCredit(method){
     for(var i = 0; i < data_credit.length; i++)
         showCreditEntry(i + 1, data_credit[i]);
     $('.container_floor_credit_data_entry').css('width', 620 + (priceTable.length - 1) * 40);
+    $('.entry_credit_form').css('margin-left', (100 + (priceTable.length - 1) * 40) / 2);
 }
 function relistPayment(method){
     $('#container_floor_payment_data').html('');
@@ -126,6 +127,7 @@ function relistPayment(method){
     for(var i = 0; i < data_payment.length; i++)
         showPaymentEntry(i + 1, data_payment[i]);
     $('.container_floor_payment_data_entry').css('width', 730 + (priceTable.length - 1) * 40);
+    $('.entry_payment_form').css('margin-left', (180 + (priceTable.length - 1) * 40) / 2);
 }
 
 function commitAddCredit(button){

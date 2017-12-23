@@ -29,11 +29,9 @@
 }
 .entry_credit_form {
     width: 520px;
-    margin-left: 240px;
 }
 .entry_payment_form {
-    width: 545px;
-    margin-left: 220px;
+    width: 550px;
 }
 
 
@@ -54,7 +52,7 @@
 .entry_date { width: 95px; }
 .entry_saler { width: 80px; }
 .entry_type_0, .entry_type_1, .entry_type_2, .entry_type_3, .entry_type_4, .entry_type_5 { width: 40px; }
-.entry_paymode { width: 50px; }
+.entry_paymode { width: 55px; }
 .entry_discount { width: 60px; }
 .entry_totalprice, .entry_oweprice { width: 60px; }
 .entry_num, .entry_discount, .entry_totalprice, .entry_oweprice { text-align: right; }
