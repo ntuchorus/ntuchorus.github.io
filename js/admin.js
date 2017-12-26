@@ -171,7 +171,7 @@ function showData(data){
     $('#programtitle').html(titleStr);
 
     if(data['mapattribute'][0]['isshowhidden'] == 1)
-        showTable[0] = showTable[1] = true;
+        showTable[2] = showTable[3] = true;
     
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
     $('#update_message').html(nowCategory['message']);
