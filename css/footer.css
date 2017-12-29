@@ -45,7 +45,7 @@
 }
 #footericon_twitter { background: url(../images/b_twitter.png) center center / 30px 30px no-repeat; }
 #footericon_twitter:hover {
-    background: url(../images/twitter_hover.png) center center / 30px 30px no-repeat;
+    background: url(../images/b_twitter_hover.png) center center / 30px 30px no-repeat;
     -moz-box-shadow:0px 2px 5px rgba(10%, 10%, 10%, 0.7);
     -webkit-box-shadow:0px 2px 5px rgba(10%, 10%, 10%, 0.7);
     box-shadow:0px 2px 5px rgba(10%, 10%, 10%, 0.7);
