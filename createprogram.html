@@ -6,172 +6,187 @@
         <script type="text/javascript" src="js/connect.js"></script>
         <script type="text/javascript" src="js/fblogin.js"></script>
         <script type="text/javascript" src="js/createprogram.js"></script>
+        <link href="css/footer.css" rel="stylesheet" type="text/css" />
         <link href="css/list.css" rel="stylesheet" type="text/css" />
         <link href="css/typeset.css" rel="stylesheet" type="text/css" />
         <link href="css/createprogram.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
-        <h1>新增演出場次票券資訊</h1>
-        <div class='floor' id='requesting'>
-            正在驗證資訊......
+        <div id='content'>
+            <h1>新增演出場次票券資訊</h1>
+            <div class='floor' id='requesting'>
+                正在驗證資訊......
+            </div>
+            <div class='floor' id='inform_basic'>
+                <div class='floor_label'>基本資訊</div>
+                <div class='list_label list_basic'>
+                    <div class='label_basic'>演出時段</div>
+                    <input type="number" id="input_basic_year" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                    <select id='select_basic_season'>
+                        <option value='0'>冬季</option>
+                        <option value='1'>夏季</option>
+                    </select>
+                </div>
+                <div class='list_label list_basic'>
+                    <div class='label_basic'>音樂會標題</div>
+                    <input type="text" id="input_basic_title"/>
+                </div>
+                <div class='list_label list_basic'>
+                    <div class='label_basic'>音樂會場地</div>
+                    <select id='select_basic_mapid'></select>
+                </div>
+            </div>
+            <div class='floor' id='inform_manager'>
+                <div class='floor_label'>權限設定</div>
+                <div class='list_label list_manager'>
+                    <div class='label_manager'>票務團秘</div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>團秘1</div>
+                        <select id='select_manager_admin_1'></select>
+                    </div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>團秘2</div>
+                        <select id='select_manager_admin_2'><option value='-1'>--空白--</option></select>
+                    </div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>團秘3</div>
+                        <select id='select_manager_admin_3'><option value='-1'>--空白--</option></select>
+                    </div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>團秘4</div>
+                        <select id='select_manager_admin_4'><option value='-1'>--空白--</option></select>
+                    </div>
+                </div>
+                <div class='list_label list_manager'>
+                    <div class='label_manager'>售票小天使</div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>Soprano</div>
+                        <select id='select_manager_saler_1'></select>
+                    </div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>Alto</div>
+                        <select id='select_manager_saler_2'></select>
+                    </div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>Tenor</div>
+                        <select id='select_manager_saler_3'></select>
+                    </div>
+                    <div class='entry_manager'>
+                        <div class='entry_manager_label'>Bass</div>
+                        <select id='select_manager_saler_4'></select>
+                    </div>
+                </div>
+            </div>
+            <div class='floor' id='inform_price'>
+                <div class='floor_label'>票價資訊</div>
+                <div class='list_label' id='list_label_pricenum'>
+                    <div class='label_price'>票價種數</div>
+                    <input type="number" id="input_price_pricenum" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                </div>
+                <div class='list_label list_price'>
+                    <div class='label_price'>票種</div>
+                    <div class='entry_price entry_price_type0'>票價1</div>
+                    <div class='entry_price entry_price_type1'>票價2</div>
+                    <div class='entry_price entry_price_type2'>票價3</div>
+                    <div class='entry_price entry_price_type3'>票價4</div>
+                    <div class='entry_price entry_price_type4'>票價5</div>
+                    <div class='entry_price entry_price_type5'>票價6</div>
+                </div>
+                <div class='list_label list_price'>
+                    <div class='label_price'>定價</div>
+                    <div class='entry_price entry_price_type0'>
+                        <input type="text" id="input_price_type0" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>元</div>
+                    </div>
+                    <div class='entry_price entry_price_type1'>
+                        <input type="text" id="input_price_type1" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>元</div>
+                    </div>
+                    <div class='entry_price entry_price_type2'>
+                        <input type="text" id="input_price_type2" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>元</div>
+                    </div>
+                    <div class='entry_price entry_price_type3'>
+                        <input type="text" id="input_price_type3" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>元</div>
+                    </div>
+                    <div class='entry_price entry_price_type4'>
+                        <input type="text" id="input_price_type4" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>元</div>
+                    </div>
+                    <div class='entry_price entry_price_type5'>
+                        <input type="text" id="input_price_type5" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>元</div>
+                    </div>
+                </div>
+                <div class='list_label list_price'>
+                    <div class='label_price'>團內折數</div>
+                    <div class='entry_price entry_price_type0'>
+                        <input type="number" id="input_price_discount0" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>%</div>
+                    </div>
+                    <div class='entry_price entry_price_type1'>
+                        <input type="number" id="input_price_discount1" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>%</div>
+                    </div>
+                    <div class='entry_price entry_price_type2'>
+                        <input type="number" id="input_price_discount2" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>%</div>
+                    </div>
+                    <div class='entry_price entry_price_type3'>
+                        <input type="number" id="input_price_discount3" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>%</div>
+                    </div>
+                    <div class='entry_price entry_price_type4'>
+                        <input type="number" id="input_price_discount4" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>%</div>
+                    </div>
+                    <div class='entry_price entry_price_type5'>
+                        <input type="number" id="input_price_discount5" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
+                        <div class='entry_price_label'>%</div>
+                    </div>
+                </div>
+                <div class='list_label list_price'>
+                    <div class='label_price'>團內售價</div>
+                    <div class='entry_price entry_price_type0' id='entry_price_type0_0'></div>
+                    <div class='entry_price entry_price_type1' id='entry_price_type1_0'></div>
+                    <div class='entry_price entry_price_type2' id='entry_price_type2_0'></div>
+                    <div class='entry_price entry_price_type3' id='entry_price_type3_0'></div>
+                    <div class='entry_price entry_price_type4' id='entry_price_type4_0'></div>
+                    <div class='entry_price entry_price_type5' id='entry_price_type5_0'></div>
+                </div>
+                <div class='list_label list_price'>
+                    <div class='label_price'>系統票價</div>
+                    <div class='entry_price entry_price_type0' id='entry_price_type0_1'></div>
+                    <div class='entry_price entry_price_type1' id='entry_price_type1_1'></div>
+                    <div class='entry_price entry_price_type2' id='entry_price_type2_1'></div>
+                    <div class='entry_price entry_price_type3' id='entry_price_type3_1'></div>
+                    <div class='entry_price entry_price_type4' id='entry_price_type4_1'></div>
+                    <div class='entry_price entry_price_type5' id='entry_price_type5_1'></div>
+                </div>
+                <div class='list_label' id='list_label_program'>
+                    <div class='label_price'>節目冊售價</div>
+                    <input type="text" id="input_price_program" onkeyup="return inputValidNumber(this, value)"/>
+                    <div class='entry_price_label'>元</div>
+                </div>
+            </div>
+            <div class='floor' id='inform_submit'>
+                <div id="comments">僅有以上設定權限的票務團秘及售票小天使可以更新本場次票圖。<br>資訊送出後無法修改，送出前請確認各項資訊。</div>
+                <div id="entry_submit"><a id='submit_createprogram' href='#'>送出</a></div>
+            </div>
         </div>
-        <div class='floor' id='inform_basic'>
-            <div class='floor_label'>基本資訊</div>
-            <div class='list_label list_basic'>
-                <div class='label_basic'>演出時段</div>
-                <input type="number" id="input_basic_year" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                <select id='select_basic_season'>
-                    <option value='0'>冬季</option>
-                    <option value='1'>夏季</option>
-                </select>
-            </div>
-            <div class='list_label list_basic'>
-                <div class='label_basic'>音樂會標題</div>
-                <input type="text" id="input_basic_title"/>
-            </div>
-            <div class='list_label list_basic'>
-                <div class='label_basic'>音樂會場地</div>
-                <select id='select_basic_mapid'></select>
-            </div>
-        </div>
-        <div class='floor' id='inform_manager'>
-            <div class='floor_label'>權限設定</div>
-            <div class='list_label list_manager'>
-                <div class='label_manager'>票務團秘</div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>團秘1</div>
-                    <select id='select_manager_admin_1'></select>
+        <div id="footer">
+            <div id="footerinner">
+                <div id="footerbutton">
+                    <a class="footericon" id="footericon_facebook" href="https://www.facebook.com/NTUChorus/" target=_blank></a>
+                    <a class="footericon" id="footericon_youtube" href="https://www.youtube.com/NTUChorus/" target=_blank></a>
                 </div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>團秘2</div>
-                    <select id='select_manager_admin_2'><option value='-1'>--空白--</option></select>
-                </div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>團秘3</div>
-                    <select id='select_manager_admin_3'><option value='-1'>--空白--</option></select>
-                </div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>團秘4</div>
-                    <select id='select_manager_admin_4'><option value='-1'>--空白--</option></select>
+                <div id="footermessage">
+                    <p>Copyright &copy 2017 NTUChorus. All rights reserved.</p>
+                    <p>Please contact r04922046_AT_ntu.edu.tw for further information.</p>
                 </div>
             </div>
-            <div class='list_label list_manager'>
-                <div class='label_manager'>售票小天使</div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>Soprano</div>
-                    <select id='select_manager_saler_1'></select>
-                </div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>Alto</div>
-                    <select id='select_manager_saler_2'></select>
-                </div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>Tenor</div>
-                    <select id='select_manager_saler_3'></select>
-                </div>
-                <div class='entry_manager'>
-                    <div class='entry_manager_label'>Bass</div>
-                    <select id='select_manager_saler_4'></select>
-                </div>
-            </div>
-        </div>
-        <div class='floor' id='inform_price'>
-            <div class='floor_label'>票價資訊</div>
-            <div class='list_label' id='list_label_pricenum'>
-                <div class='label_price'>票價種數</div>
-                <input type="number" id="input_price_pricenum" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-            </div>
-            <div class='list_label list_price'>
-                <div class='label_price'>票種</div>
-                <div class='entry_price entry_price_type0'>票價1</div>
-                <div class='entry_price entry_price_type1'>票價2</div>
-                <div class='entry_price entry_price_type2'>票價3</div>
-                <div class='entry_price entry_price_type3'>票價4</div>
-                <div class='entry_price entry_price_type4'>票價5</div>
-                <div class='entry_price entry_price_type5'>票價6</div>
-            </div>
-            <div class='list_label list_price'>
-                <div class='label_price'>定價</div>
-                <div class='entry_price entry_price_type0'>
-                    <input type="text" id="input_price_type0" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>元</div>
-                </div>
-                <div class='entry_price entry_price_type1'>
-                    <input type="text" id="input_price_type1" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>元</div>
-                </div>
-                <div class='entry_price entry_price_type2'>
-                    <input type="text" id="input_price_type2" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>元</div>
-                </div>
-                <div class='entry_price entry_price_type3'>
-                    <input type="text" id="input_price_type3" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>元</div>
-                </div>
-                <div class='entry_price entry_price_type4'>
-                    <input type="text" id="input_price_type4" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>元</div>
-                </div>
-                <div class='entry_price entry_price_type5'>
-                    <input type="text" id="input_price_type5" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>元</div>
-                </div>
-            </div>
-            <div class='list_label list_price'>
-                <div class='label_price'>團內折數</div>
-                <div class='entry_price entry_price_type0'>
-                    <input type="number" id="input_price_discount0" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>%</div>
-                </div>
-                <div class='entry_price entry_price_type1'>
-                    <input type="number" id="input_price_discount1" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>%</div>
-                </div>
-                <div class='entry_price entry_price_type2'>
-                    <input type="number" id="input_price_discount2" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>%</div>
-                </div>
-                <div class='entry_price entry_price_type3'>
-                    <input type="number" id="input_price_discount3" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>%</div>
-                </div>
-                <div class='entry_price entry_price_type4'>
-                    <input type="number" id="input_price_discount4" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>%</div>
-                </div>
-                <div class='entry_price entry_price_type5'>
-                    <input type="number" id="input_price_discount5" onchange="return inputValidNumber(this, value)" onkeyup="return inputValidNumber(this, value)"/>
-                    <div class='entry_price_label'>%</div>
-                </div>
-            </div>
-            <div class='list_label list_price'>
-                <div class='label_price'>團內售價</div>
-                <div class='entry_price entry_price_type0' id='entry_price_type0_0'></div>
-                <div class='entry_price entry_price_type1' id='entry_price_type1_0'></div>
-                <div class='entry_price entry_price_type2' id='entry_price_type2_0'></div>
-                <div class='entry_price entry_price_type3' id='entry_price_type3_0'></div>
-                <div class='entry_price entry_price_type4' id='entry_price_type4_0'></div>
-                <div class='entry_price entry_price_type5' id='entry_price_type5_0'></div>
-            </div>
-            <div class='list_label list_price'>
-                <div class='label_price'>系統票價</div>
-                <div class='entry_price entry_price_type0' id='entry_price_type0_1'></div>
-                <div class='entry_price entry_price_type1' id='entry_price_type1_1'></div>
-                <div class='entry_price entry_price_type2' id='entry_price_type2_1'></div>
-                <div class='entry_price entry_price_type3' id='entry_price_type3_1'></div>
-                <div class='entry_price entry_price_type4' id='entry_price_type4_1'></div>
-                <div class='entry_price entry_price_type5' id='entry_price_type5_1'></div>
-            </div>
-            <div class='list_label' id='list_label_program'>
-                <div class='label_price'>節目冊售價</div>
-                <input type="text" id="input_price_program" onkeyup="return inputValidNumber(this, value)"/>
-                <div class='entry_price_label'>元</div>
-            </div>
-        </div>
-        <div class='floor' id='inform_submit'>
-            <div id="comments">僅有以上設定權限的票務團秘及售票小天使可以更新本場次票圖。<br>資訊送出後無法修改，送出前請確認各項資訊。</div>
-            <div id="entry_submit"><a id='submit_createprogram' href='#'>送出</a></div>
         </div>
     </body>
 </html>
