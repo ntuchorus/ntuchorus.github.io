@@ -56,6 +56,53 @@
 }
 
 
+.statistic_entry, .statistic_entry_full {
+    display: block;
+    float: left;
+    font-size: 20px;
+    width: 190px;
+    height: 60px;
+    line-height: 60px;
+    color: #4A4A4A;
+}
+.statistic_entry_full {
+    width: 480px;
+}
+.statistic_label {
+    height: 25px;
+    line-height: 25px;
+}
+.statistic_bar, .statistic_bar_full {
+    border-radius: 5px;
+    text-align: left;
+    height: 15px;
+    margin: 10px;
+    line-height: 15px;
+}
+.statistic_bar_full {
+    width: 460px;
+}
+.statistic_bar_progress {
+    border-radius: 5px;
+    text-align: left;
+    height: 15px;
+    line-height: 15px;
+}
+#statistic_bar_0 { background: #BAE89B; }
+#statistic_bar_1 { background: #80AEED; }
+#statistic_bar_2 { background: #E7EB73; }
+#statistic_bar_3 { background: #EBB391; }
+#statistic_bar_4 { background: #C99BE8; }
+#statistic_bar_total, #statistic_bar_DM { background: #1bded5; }
+#statistic_bar_progress_0 { background: #64bb2a; }
+#statistic_bar_progress_1 { background: #1d64c9; }
+#statistic_bar_progress_2 { background: #adb319; }
+#statistic_bar_progress_3 { background: #c26024; }
+#statistic_bar_progress_4 { background: #812abb; }
+#statistic_bar_progress_total, #statistic_bar_progress_DM { background: #15aca5; }
+
+
+
 /* Floor 2 */
 .entry_2_date, .entry_2_type_0, .entry_2_type_1, .entry_2_type_2, .entry_2_type_3, .entry_2_type_4, .entry_2_type_5,
 .entry_2_discount, .entry_2_totalprice {
