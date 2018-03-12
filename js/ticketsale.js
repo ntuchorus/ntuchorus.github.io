@@ -168,7 +168,7 @@ function showData(data){
     }
 
     var date = new Date();
-    var dateM = date.getMonth() > 9 ? '' + date.getMonth() : '0' + date.getMonth();
+    var dateM = date.getMonth() + 1 > 9 ? '' + (date.getMonth() + 1) : '0' + (date.getMonth() + 1);
     var dateD = date.getDate() > 9 ? '' + date.getDate() : '0' + date.getDate();
     $('#submit_date').val(date.getFullYear() + '-' + dateM + '-' + dateD);
     $('#message').show();

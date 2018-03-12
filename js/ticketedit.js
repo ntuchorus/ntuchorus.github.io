@@ -281,7 +281,7 @@ function getData(pid){
 $(document).ready(function(){
     fbsdkInitialization(function(){
         var date = new Date();
-        var dateM = date.getMonth() > 9 ? '' + date.getMonth() : '0' + date.getMonth();
+        var dateM = date.getMonth() + 1 > 9 ? '' + (date.getMonth() + 1) : '0' + (date.getMonth() + 1);
         var dateD = date.getDate() > 9 ? '' + date.getDate() : '0' + date.getDate();
         dateString = date.getFullYear() + '-' + dateM + '-' + dateD;
         getData(nowProgram);
