@@ -1,0 +1,7 @@
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+<filesMatch ".(css|js)$">
+Header set Cache-Control "max-age=86400, public"
+</filesMatch>
