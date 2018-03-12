@@ -167,10 +167,10 @@ function showData(data){
             updateSeat(seat_id);
     }
 
-    var dateArr = new Date().toLocaleDateString().split('/');
-    dateArr[1] = dateArr[1].length > 1 ? dateArr[1] : '0' + dateArr[1];
-    dateArr[2] = dateArr[2].length > 1 ? dateArr[2] : '0' + dateArr[2];
-    $('#submit_date').val(dateArr[0] + '-' + dateArr[1] + '-' + dateArr[2]);
+    var date = new Date();
+    var dateM = date.getMonth() > 9 ? '' + date.getMonth() : '0' + date.getMonth();
+    var dateD = date.getDate() > 9 ? '' + date.getDate() : '0' + date.getDate();
+    $('#submit_date').val(date.getFullYear() + '-' + dateM + '-' + dateD);
     $('#message').show();
     $('#floor_4').show();
     $('#floor_3').show();

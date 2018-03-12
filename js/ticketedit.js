@@ -280,10 +280,10 @@ function getData(pid){
 
 $(document).ready(function(){
     fbsdkInitialization(function(){
-        var dateArr = new Date().toLocaleDateString().split('/');
-        dateArr[1] = dateArr[1].length > 1 ? dateArr[1] : '0' + dateArr[1];
-        dateArr[2] = dateArr[2].length > 1 ? dateArr[2] : '0' + dateArr[2];
-        dateString = dateArr[0] + '-' + dateArr[1] + '-' + dateArr[2];
+        var date = new Date();
+        var dateM = date.getMonth() > 9 ? '' + date.getMonth() : '0' + date.getMonth();
+        var dateD = date.getDate() > 9 ? '' + date.getDate() : '0' + date.getDate();
+        dateString = date.getFullYear() + '-' + dateM + '-' + dateD;
         getData(nowProgram);
         $('#button_credit_sort_id').click(function(){
             relistCredit(sortDataId);
