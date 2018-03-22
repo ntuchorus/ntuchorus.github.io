@@ -3,6 +3,7 @@ var nowFBID = 0;
 var editManagerTable = {}; 
 var salerTable = {};
 var priceTable = [];
+var mapTable = {};
 
 function showPriceSetting(num){
     for(var i = 0; i < 6; i++){
@@ -56,6 +57,7 @@ function commitCreateProgram(){
         fbsdkCheckLogin(function(fbID, fbToken){
             var dataset = {'year': parseInt($('#input_basic_year').val()), 'season': parseInt($('#select_basic_season').val()),
                            'title': $('#input_basic_title').val(), 'mapid': parseInt($('#select_basic_mapid').val()),
+                           'mapwidth': mapTable[parseInt($('#select_basic_mapid').val())]['width'],
                            'programprice': parseInt($('#input_price_program').val())};
             dataset['manager'] = [];
             for(var i = 1; i <= 4; i++){
@@ -97,8 +99,10 @@ function showData(data) {
     $('#input_basic_year').val((new Date()).getFullYear());
     $('#input_basic_year').attr('min', (new Date()).getFullYear());
     $('#input_basic_year').attr('max', 9999);
-    for(var i = 0; i < data['mapindex'].length; i++)
+    for(var i = 0; i < data['mapindex'].length; i++){
         $('#select_basic_mapid').append("<option value='" + data['mapindex'][i]['id'] + "'>" + data['mapindex'][i]['name'] + '</option>');
+        mapTable[data['mapindex'][i]['id']] = data['mapindex'][i];
+    }
 
     for(var i = 0; i < data['manager'].length; i++){
         if(data['manager'][i]['fbid'] == nowFBID){

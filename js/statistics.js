@@ -278,9 +278,11 @@ function showData(data){
     }
     showFloor2Entry(2, data_floor2_total_2);
     $('.container_floor2_sub').css('width', 230 + (data['price'].length - 1) * 40);
-    $('#container_floor2_1_sub').css('margin-left', 255 - (data['price'].length - 1) * 40);
-    $('#container_floor2_2_sub').css('margin-right', 255 - (data['price'].length - 1) * 40);
     $('.container_floor2_sub').height(97 + Math.max(data_floor2_1.length, data_floor2_2.length) * 26);
+    $('#container_floor2_1_sub').css('padding-left', 255 - (data['price'].length - 1) * 40);
+    $('#container_floor2_2_sub').css('padding-right', 255 - (data['price'].length - 1) * 40);
+    $('#container_floor2_1_sub').css('padding-right', 15);
+    $('#container_floor2_2_sub').css('padding-left', 15);
     $('#floor_statistic_2').height(157 + Math.max(data_floor2_1.length, data_floor2_2.length) * 26);
 
     /* Floor 4 table */

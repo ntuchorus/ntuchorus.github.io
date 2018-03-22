@@ -11,9 +11,7 @@ function programChange(e){
     $('#requesting').html("正在讀取座位圖資訊......");
     $('#requesting').show();
     $('#message').hide();
-    $('#floor_4').hide();
-    $('#floor_3').hide();
-    $('#floor_2').hide();
+    $('div[id^=floor_]').remove();
     $('#form').hide();
     $('#submit_buyer').val('');
     $('#submit_department select').val('0');
@@ -43,13 +41,14 @@ function inputValidNumber(e, pnumber){
 }
 
 function updateSeat(id) {
-    $('#' + id).attr('class', 'seat');
-    if(ticketTable[id]['saleid'] != null || ticketTable[id]['preserve'] >= 4)
-        $('#' + id).addClass('seat_type_a');
+    var classStr = 'seat';
+    if(ticketTable[id]['saleid'] || ticketTable[id]['preserve'] >= 4)
+        classStr += ' seat_type_a';
     else if(id in editTicketTable)
-        $('#' + id).addClass('seat_select');
+        classStr += ' seat_select';
     else
-        $('#' + id).addClass('seat_type_' + ticketTable[id]['type']);
+        classStr += ' seat_type_' + ticketTable[id]['type'];
+    return classStr;
 }
 
 function showTypeSelected() {
@@ -63,7 +62,7 @@ function select(a) {
     var click_id = a.attr('id');
     var click_type = ticketTable[click_id]['type'];
     var click_price = priceTable[click_type] * priceDiscountTable[click_type] / 100;
-    if(ticketTable[click_id]['state'] == 2 && ticketTable[click_id]['saleid'] == null && ticketTable[click_id]['preserve'] < 4){
+    if(ticketTable[click_id]['state'] == 2 && !ticketTable[click_id]['saleid'] && ticketTable[click_id]['preserve'] < 4){
         if(click_id in editTicketTable){
             delete editTicketTable[click_id];
             priceSelected -= click_price;
@@ -76,7 +75,7 @@ function select(a) {
             typeSelected[click_type] += 1;
             $('#submit_count_type' + click_type).html(typeSelected[click_type]);
         }
-        updateSeat(click_id);
+        $('#' + click_id).attr('class', updateSeat(click_id));
     }
     $('#total_price').html(priceSelected - parseInt($('#submit_discount').val()) + '元');
 }
@@ -141,7 +140,6 @@ function showData(data){
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
     $('#update_message').html(nowCategory['message']);
     $('#requesting').hide();
-    $('a[id^=seat_]').attr('class', 'seat seat_type_b');
 
     for(var i = 0; i < data['price'].length; i++){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
@@ -154,27 +152,34 @@ function showData(data){
     }
     showTypeSelected();
 
-    for(var i = 0; i < data['ticket'].length; i++){
-        var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
+    var mapCode = getMapCode(data['ticket'], 'a', false, nowCategory['mapwidth'], function(item){
+        var seat_id = 'seat_' + item['floor'] + '_' + item['row'] + '_' + item['seat'];
         var arr = {};
-        arr['id'] = parseInt(data['ticket'][i]['id']);
-        arr['state'] = parseInt(data['ticket'][i]['state']);
-        arr['type'] = parseInt(data['ticket'][i]['type']);
-        arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
-        arr['saleid'] = data['ticket'][i]['saleid'];
+        arr['id'] = parseInt(item['id']);
+        arr['state'] = parseInt(item['state']);
+        arr['type'] = parseInt(item['type']);
+        arr['preserve'] = parseInt(item['preserve']);
+        arr['saleid'] = parseInt(item['saleid']);
         ticketTable[seat_id] = arr;
         if(arr['state'] == 2)
-            updateSeat(seat_id);
-    }
+            return updateSeat(seat_id);
+        else
+            return 'seat seat_type_b';
+    });
+    for(var i = 0; i < mapCode.length; i++)
+        $(mapCode[i]).insertAfter("#message");
+
+    $('a[id^=seat_]').click(function(){
+        select($(this));
+        return false;
+    });
 
     var date = new Date();
     var dateM = date.getMonth() + 1 > 9 ? '' + (date.getMonth() + 1) : '0' + (date.getMonth() + 1);
     var dateD = date.getDate() > 9 ? '' + date.getDate() : '0' + date.getDate();
     $('#submit_date').val(date.getFullYear() + '-' + dateM + '-' + dateD);
     $('#message').show();
-    $('#floor_4').show();
-    $('#floor_3').show();
-    $('#floor_2').show();
+    $('div[id^=floor_]').show();
     $('#form').show();
 }
 
@@ -202,10 +207,6 @@ function getData(pid){
 $(document).ready(function(){
     fbsdkInitialization(function(){
         getData(nowProgram);
-        $('a[id^=seat_]').click(function(){
-            select($(this));
-            return false;
-        });
         $('#submit').click(function(){
             commitData();
             return false;

@@ -1,5 +1,4 @@
 #footer {
-    font-size: 18px;
     margin: 0;
     text-align: center;
     width: 100%;
@@ -15,6 +14,8 @@
 #footermessage {
     float: left;
     color: #FFFFFF;
+    font-size: 15px;
+    font-family: "Calibri", "Heiti TC", "微軟正黑體";
     width: 760px;
     margin: 20px 0 20px 0;
     line-height: 20px;

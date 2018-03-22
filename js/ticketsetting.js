@@ -13,10 +13,8 @@ function programChange(e){
     $('#requesting').html("正在讀取座位圖資訊......");
     $('#requesting').show();
     $('#message').hide();
-    $('#selectors').hide();
-    $('#floor_4').hide();
-    $('#floor_3').hide();
-    $('#floor_2').hide();
+    $('#selector').hide();
+    $('div[id^=floor_]').remove();
     $('#form').hide();
     nowProgram = e.value;
     ticketTable = {};
@@ -50,33 +48,30 @@ function updateSeat(id) {
     if(finalType == priceTable.length - 1)
         finalType = 'v';
 
-    $('#' + id).attr('class', 'seat');
+    var classStr = 'seat';
     if(finalPreserve > 0){
-        $('#' + id).addClass('seat_preserve_' + finalPreserve);
+        classStr += ' seat_preserve_' + finalPreserve;
         if($('#isShowSaled').prop('checked')){
             if(finalState == 0)
-                $('#' + id).addClass('seat_type_' + finalType);
+                classStr += ' seat_type_' + finalType;
             else
-                $('#' + id).addClass('seat_state_' + finalState);
+                classStr += ' seat_state_' + finalState;
         }
         else
-            $('#' + id).addClass('seat_type_' + finalType);
+            classStr += ' seat_type_' + finalType;
     }
     else{
-        $('#' + id).addClass('seat_type_' + finalType);
+        classStr += ' seat_type_' + finalType;
         if($('#isShowSaled').prop('checked')){
-            if(finalState == 0){
-                $('#' + id).addClass('seat_type_' + finalType)
-                           .addClass('seat_type_b_' + finalType);
-            }
-            else {
-                $('#' + id).addClass('seat_state_' + finalState)
-                           .addClass('seat_state_b_' + finalState);
-            }
+            if(finalState == 0)
+                classStr += ' seat_type_' + finalType + ' seat_type_b_' + finalType;
+            else
+                classStr += ' seat_state_' + finalState + ' seat_state_b_' + finalState;
         }
         else
-            $('#' + id).addClass('seat_type_b_' + finalType);
+            classStr += ' seat_type_b_' + finalType;
     }
+    return classStr;
 }
 
 function showIconGraph(){
@@ -106,7 +101,7 @@ function showIconGraph(){
 
 function showSaleData(box) {
     Object.keys(ticketTable).forEach(function(key, idx) {
-        updateSeat(key);
+        $('#' + key).attr('class', updateSeat(key));
     });
 }
 
@@ -124,7 +119,7 @@ function select(a) {
         else
             editTicketTablePreserve[click_id] = editSelector % 10;
     }
-    updateSeat(click_id);
+    $('#' + click_id).attr('class', updateSeat(click_id));
     return false;
 }
 
@@ -199,23 +194,27 @@ function showData(data){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
         priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
     }
-    showIconGraph();
 
-    for(var i = 0; i < data['ticket'].length; i++){
-        var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
+    var mapCode = getMapCode(data['ticket'], 'a', false, nowCategory['mapwidth'], function(item){
+        var seat_id = 'seat_' + item['floor'] + '_' + item['row'] + '_' + item['seat'];
         var arr = {};
-        arr['id'] = parseInt(data['ticket'][i]['id']);
-        arr['state'] = parseInt(data['ticket'][i]['state']);
-        arr['type'] = parseInt(data['ticket'][i]['type']);
-        arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
+        arr['id'] = parseInt(item['id']);
+        arr['state'] = parseInt(item['state']);
+        arr['type'] = parseInt(item['type']);
+        arr['preserve'] = parseInt(item['preserve']);
         ticketTable[seat_id] = arr;
-        updateSeat(seat_id);
-    }
+        return updateSeat(seat_id);
+    });
+    for(var i = 0; i < mapCode.length; i++)
+        $(mapCode[i]).insertAfter($("#selector"));
+    showIconGraph();
+    $('a[id^=seat_]').click(function(){
+        select($(this));
+        return false;
+    });
     $('#message').show();
-    $('#selectors').show();
-    $('#floor_4').show();
-    $('#floor_3').show();
-    $('#floor_2').show();
+    $('#selector').show();
+    $('div[id^=floor_]').show();
     $('#form').show();
 }
 
@@ -244,10 +243,6 @@ function getData(pid){
 $(document).ready(function(){
     fbsdkInitialization(function(){
         getData(nowProgram);
-        $('a[id^=seat_]').click(function(){
-            select($(this));
-            return false;
-        });
         $('#submit_change').click(commitData);
         $('#submit_clear').click(commitClear);
     });

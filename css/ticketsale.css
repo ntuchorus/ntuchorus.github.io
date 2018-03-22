@@ -1,31 +1,14 @@
 /* Visibility Init */
-#message, #floor_4, #floor_3, #floor_2, #form, #statistic {
+#message, #form, #statistic {
     display: none;
 }
 
 /* Floor */
-#container_4 {
-    margin: 0 auto;
-    width: 954px;
-    height: 336px;
-}
-#container_3 {
-    margin: 0 auto;
-    width: 954px;
-    height: 320px;
-}
-#container_2 {
-    margin: 0 auto;
-    width: 882px;
-    height: 512px;
-}
 #container_form {
-    margin: 0 auto;
     width: 550px;
     height: 200px;
 }
 #container_submit {
-    margin: 0 auto;
     width: 100px;
     height: 50px;
 }

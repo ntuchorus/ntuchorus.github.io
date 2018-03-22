@@ -12,9 +12,7 @@ function programChange(e){
     $('#requesting').html("正在讀取座位圖資訊......");
     $('#requesting').show();
     $('#message').hide();
-    $('#floor_4').hide();
-    $('#floor_3').hide();
-    $('#floor_2').hide();
+    $('div[id^=floor_]').remove();
     $('#form').hide();
     nowProgram = e.value;
     ticketTable = {};
@@ -33,19 +31,17 @@ function updateSeat(id) {
     var finalState = ticketTable[id]['state'];
     var finalType = ticketTable[id]['type'];
     var finalPreserve = ticketTable[id]['preserve'];
-    
-    $('#' + id).attr('class', 'seat');
+    var classStr = 'seat';
     if(showTable[finalPreserve]) {
-        if(id in editTicketTable){
-            $('#' + id).addClass('seat_select');
-        }
+        if(id in editTicketTable)
+            classStr += ' seat_select';
         else{
             if(finalState == 2)
-                $('#' + id).addClass('seat_type_b');
+                classStr += ' seat_type_b';
             else if(finalState == 1)
-                $('#' + id).addClass('seat_type_a');
+                classStr += ' seat_type_a';
             else
-                $('#' + id).addClass('seat_type_' + finalType);
+                classStr += ' seat_type_' + finalType;
         }
     }
     else {
@@ -59,8 +55,9 @@ function updateSeat(id) {
             $('#submit_count_type' + finalType).html(typeSelected[finalType]);
             $('#form_label').html('選取總金額：' + priceSelected + '元');
         }
-        $('#' + id).addClass('seat_type_c');
+        classStr += ' seat_type_c';
     }
+    return classStr;
 }
 
 function showIconGraph(){
@@ -115,7 +112,7 @@ function select(a) {
             typeSelected[click_type] += 1;
             $('#submit_count_type' + click_type).html(typeSelected[click_type]);
         }
-        updateSeat(click_id);
+        $('#' + click_id).attr('class', updateSeat(click_id));
     }
     $('#form_label').html('選取總金額：' + priceSelected + '元');
 }
@@ -182,27 +179,28 @@ function showData(data){
         priceDiscountTable[data['price'][i]['id']] = data['price'][i]['discount'];
         typeSelected[i] = 0;
     }
+
+    var mapCode = getMapCode(data['ticket'], 'a', true, nowCategory['mapwidth'], function(item){
+        var seat_id = 'seat_' + item['floor'] + '_' + item['row'] + '_' + item['seat'];
+        var arr = {};
+        arr['id'] = parseInt(item['id']);
+        arr['state'] = parseInt(item['state']);
+        arr['type'] = parseInt(item['type']);
+        arr['preserve'] = parseInt(item['preserve']);
+        ticketTable[seat_id] = arr;
+        return updateSeat(seat_id);
+    });
+    for(var i = 0; i < mapCode.length; i++)
+        $(mapCode[i]).insertAfter($("#message"));
+
     showIconGraph();
     showTypeSelected();
-
-    for(var i = 0; i < data['ticket'].length; i++){
-        var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
-        var seat_state = parseInt(data['ticket'][i]['state']);
-        var seat_type = parseInt(data['ticket'][i]['type']);
-        var seat_preserve = parseInt(data['ticket'][i]['preserve']);
-        var arr = {};
-        arr['id'] = parseInt(data['ticket'][i]['id']);
-        arr['state'] = parseInt(data['ticket'][i]['state']);
-        arr['type'] = parseInt(data['ticket'][i]['type']);
-        arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
-        ticketTable[seat_id] = arr;
-        updateSeat(seat_id);
-    }
-
+    $('a[id^=seat_]').click(function(){
+        select($(this));
+        return false;
+    });
     $('#message').show();
-    $('#floor_4').show();
-    $('#floor_3').show();
-    $('#floor_2').show();
+    $('div[id^=floor_]').show();
     $('#form').show();
 }
 
@@ -231,10 +229,6 @@ function getData(pid){
 $(document).ready(function(){
     fbsdkInitialization(function(){
         getData(nowProgram);
-        $('a[id^=seat_]').click(function(){
-            select($(this));
-            return false;
-        });
         $('#submit_clear').click(function(){
             commitData(0);
             return false;

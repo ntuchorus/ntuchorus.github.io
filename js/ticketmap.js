@@ -13,9 +13,7 @@ function programChange(e){
     $('#requesting').html("正在讀取座位圖資訊......");
     $('#requesting').show();
     $('#message').hide();
-    $('#floor_4').hide();
-    $('#floor_3').hide();
-    $('#floor_2').hide();
+    $('div[id^=floor_]').remove();
     $('#form').hide();
     $('#submit_buyer').val('');
     $('#submit_department').val('');
@@ -39,15 +37,16 @@ function programChange(e){
 }
 
 function updateSeat(id) {
-    $('#' + id).attr('class', 'seat');
+    var classStr = 'seat';
     if(ticketTable[id]['state'] < 2 || ticketTable[id]['preserve'] == 4 || ticketTable[id]['preserve'] > 5)
-        $('#' + id).addClass('seat_type_b');
-    else if(ticketTable[id]['state'] == 2 && ticketTable[id]['saleid'] == null && ticketTable[id]['preserve'] != 5)
-        $('#' + id).addClass('seat_type_a');
+        classStr += ' seat_type_b';
+    else if(ticketTable[id]['state'] == 2 && !ticketTable[id]['saleid'] && ticketTable[id]['preserve'] != 5)
+        classStr += ' seat_type_a';
     else if(id in selectedTicketTable)
-        $('#' + id).addClass('seat_select');
+        classStr += ' seat_select';
     else
-        $('#' + id).addClass('seat_type_' + ticketTable[id]['type']);
+        classStr += ' seat_type_' + ticketTable[id]['type'];
+    return classStr;
 }
 
 function showTypeSelected() {
@@ -59,7 +58,7 @@ function showTypeSelected() {
 
 function select(a) {
     var click_id = a.attr('id');
-    if(ticketTable[click_id]['state'] == 2 && ticketTable[click_id]['saleid'] != null && !(click_id in selectedTicketTable)){
+    if(ticketTable[click_id]['state'] == 2 && ticketTable[click_id]['saleid'] && !(click_id in selectedTicketTable)){
         var deleteSelectTable = {};
         for(var id in selectedTicketTable){
             deleteSelectTable[id] = 1;
@@ -67,7 +66,7 @@ function select(a) {
         }
         selectedTicketTable = {};
         for(var id in deleteSelectTable)
-            updateSeat(id);
+            $('#' + id).attr('class', updateSeat(id));
 
         var sale_id = ticketTable[click_id]['saleid'];
         var sale_price = 0;
@@ -80,7 +79,7 @@ function select(a) {
         for(var id in ticketTable){
             if(ticketTable[id]['saleid'] == sale_id){
                 selectedTicketTable[id] = 1;
-                updateSeat(id);
+                $('#' + id).attr('class', updateSeat(id));
                 typeSelected[ticketTable[id]['type']] += 1;
                 sale_price += priceTable[ticketTable[id]['type']] * priceDiscountTable[ticketTable[id]['type']] / 100;
             }
@@ -107,7 +106,7 @@ function select(a) {
         }
         selectedTicketTable = {};
         for(var id in deleteSelectTable)
-            updateSeat(id);
+            $('#' + id).attr('class', updateSeat(id));
 
         var sale_price = 0;
         $('#submit_buyer').val('系統票');
@@ -120,9 +119,8 @@ function select(a) {
 
         for(var id in ticketTable){
             if(ticketTable[id]['preserve'] == 5 && ticketTable[id]['state'] == 2){
-                $('#' + id).attr('class', 'seat seat_select');
                 selectedTicketTable[id] = 1;
-                updateSeat(id);
+                $('#' + id).attr('class', updateSeat(id));
                 typeSelected[ticketTable[id]['type']] += 1;
                 sale_price += priceTable[ticketTable[id]['type']];
             }
@@ -154,7 +152,6 @@ function showData(data){
     $('#update_date').html('更新時間：' + nowCategory['time'] + '　　　瀏覽次數：' + data['mapattribute'][0]['counter']);
     $('#update_message').html(nowCategory['message']);
     $('#requesting').hide();
-    $('a[id^=seat_]').attr('class', 'seat seat_type_b');
 
     for(var i = 0; i < data['price'].length; i++){
         priceTable[data['price'][i]['id']] = data['price'][i]['price'];
@@ -163,21 +160,24 @@ function showData(data){
     }
     for(var i = 0; i < data['manager'].length; i++)
         salerTable[data['manager'][i]['id']] = data['manager'][i]['name'];
-    showTypeSelected();
 
-    for(var i = 0; i < data['ticket'].length; i++){
-        var seat_id = 'seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
+    var mapCode = getMapCode(data['ticket'], 'a', false, nowCategory['mapwidth'], function(item){
+        var seat_id = 'seat_' + item['floor'] + '_' + item['row'] + '_' + item['seat'];
         var arr = {};
-        arr['id'] = parseInt(data['ticket'][i]['id']);
-        arr['state'] = parseInt(data['ticket'][i]['state']);
-        arr['type'] = parseInt(data['ticket'][i]['type']);
-        arr['preserve'] = parseInt(data['ticket'][i]['preserve']);
-        arr['saleid'] = data['ticket'][i]['saleid'];
+        arr['id'] = parseInt(item['id']);
+        arr['state'] = parseInt(item['state']);
+        arr['type'] = parseInt(item['type']);
+        arr['preserve'] = parseInt(item['preserve']);
+        arr['saleid'] = parseInt(item['saleid']);
         ticketTable[seat_id] = arr;
-        if(arr['state'] == 2){
-            updateSeat(seat_id);
-        }
-    }
+        if(arr['state'] == 2)
+            return updateSeat(seat_id);
+        else
+            return 'seat seat_type_b';
+    });
+    for(var i = 0; i < mapCode.length; i++)
+        $(mapCode[i]).insertAfter($("#message"));
+
     for(var i = 0; i < data['paylist'].length; i++)
         payTable[data['paylist'][i]['id']] = data['paylist'][i];
     for(var i = 0; i < data['creditlist'].length; i++){
@@ -186,11 +186,13 @@ function showData(data){
         else
             creditTable[data['creditlist'][i]['saleid']] = data['creditlist'][i]['price'];
     }
-
+    showTypeSelected();
+    $('a[id^=seat_]').click(function(){
+        select($(this));
+        return false;
+    });
     $('#message').show();
-    $('#floor_4').show();
-    $('#floor_3').show();
-    $('#floor_2').show();
+    $('div[id^=floor_]').show();
     $('#form').show();
 }
 
@@ -218,10 +220,6 @@ function getData(pid){
 $(document).ready(function(){
     fbsdkInitialization(function(){
         getData(nowProgram);
-        $('a[id^=seat_]').click(function(){
-            select($(this));
-            return false;
-        });
     });
 });
 

@@ -6,9 +6,7 @@ function programChange(e){
     $('#requesting').html("正在讀取座位圖資訊......");
     $('#requesting').show();
     $('#message').hide();
-    $('#floor_4').hide();
-    $('#floor_3').hide();
-    $('#floor_2').hide();
+    $('div[id^=floor_]').remove();
     $('#statistic').hide();
     nowProgram = e.value;
     priceTable = [];
@@ -28,14 +26,14 @@ function showIconGraph(){
                "<div class='graphicon_a'></div>" +
                "<div class='graphlabel_forb'>已劃票</div>" +
            "</div>" +
-            "<div class='block_graph'>" +
-                "<div class='graphicon_b'></div>" +
-                "<div class='graphlabel_sale'>已售票</div>" +
-            "</div>" +
-            "<div class='block_graph'>" +
-                "<div class='graphicon_c'></div>" +
-                "<div class='graphlabel_forb'>不販售</div>" +
-            "</div>";
+           "<div class='block_graph'>" +
+               "<div class='graphicon_b'></div>" +
+               "<div class='graphlabel_sale'>已售票</div>" +
+           "</div>" +
+           "<div class='block_graph'>" +
+               "<div class='graphicon_c'></div>" +
+               "<div class='graphlabel_forb'>不販售</div>" +
+           "</div>";
     $(".container_graph").html(str).css('width', 105 * (priceTable.length + 2));
 }
 
@@ -69,7 +67,6 @@ function showStatistics(sale, total, dm){
 function showData(data){
     if(nowProgram == -1)
         nowProgram = data['mapattribute'][0]['currentdataid'];
-    $('#menumanager').html("此頁不需登入");
     var statistic_sale = [], statistic_total = [], nowCategory;
     for(var i = 0; i < data['category'].length; i++){
         var addStr = "<option value='" + data['category'][i]['id'] + "'>" + data['category'][i]['year'];
@@ -108,34 +105,36 @@ function showData(data){
             statistic_sale[data['price'].length - 1] += parseInt(data['percentage'][i]['num']);
         }
     }
-    showStatistics(statistic_sale, statistic_total, nowCategory);
-    showIconGraph();
 
-    for(var i = 0; i < data['ticket'].length; i++){
-        var seat_id = '#seat_' + data['ticket'][i]['floor'] + '_' + data['ticket'][i]['row'] + '_' + data['ticket'][i]['seat'];
-        var seat_state = parseInt(data['ticket'][i]['state']);
-        var seat_type = parseInt(data['ticket'][i]['type']);
-        var seat_preserve = parseInt(data['ticket'][i]['preserve']);
-        $(seat_id).attr('class', 'seat');
+    var mapCode = getMapCode(data['ticket'], 'div', true, nowCategory['mapwidth'], function(item){
+        var seat_state = parseInt(item['state']);
+        var seat_type = parseInt(item['type']);
+        var seat_preserve = parseInt(item['preserve']);
+        var classStr = 'seat';
         if(seat_preserve > 0 && data['mapattribute'][0]['isshowhidden'] == 0)
-            $(seat_id).addClass('seat_type_c');
+            classStr += ' seat_type_c';
         else if((seat_preserve == 1 || seat_preserve >= 4) && data['mapattribute'][0]['isshowhidden'] == 1)
-            $(seat_id).addClass('seat_type_c');
+            classStr += ' seat_type_c';
         else if(seat_state == 2)
-            $(seat_id).addClass('seat_type_b');
+            classStr += ' seat_type_b';
         else if(seat_state == 1)
-            $(seat_id).addClass('seat_type_a');
+            classStr += ' seat_type_a';
         else{
             if(seat_type >= data['price'].length - 1)
-                $(seat_id).addClass('seat_type_c');
+                classStr += ' seat_type_c';
             else
-                $(seat_id).addClass('seat_type_' + seat_type);
+                classStr += ' seat_type_' + seat_type;
         }
-    }
+        return classStr;
+    });
+
+    for(var i = 0; i < mapCode.length; i++)
+        $(mapCode[i]).insertAfter($("#message"));
+
+    showStatistics(statistic_sale, statistic_total, nowCategory);
+    showIconGraph();
     $('#message').show();
-    $('#floor_4').show();
-    $('#floor_3').show();
-    $('#floor_2').show();
+    $('div[id^=floor_]').show();
     $('#statistic').show();
 }
 

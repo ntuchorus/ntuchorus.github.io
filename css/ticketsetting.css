@@ -1,117 +1,16 @@
 /* Visibility Init */
-#message, #selectors, #floor_4, #floor_3, #floor_2, #statistic, #form {
+#message, #selector, #statistic, #form {
     display: none;
 }
 
 /* Floor */
-#container_4 {
-    margin: 0 auto;
-    width: 954px;
-    height: 336px;
-}
-#container_3 {
-    margin: 0 auto;
-    width: 954px;
-    height: 320px;
-}
-#container_2 {
-    margin: 0 auto;
-    width: 882px;
-    height: 512px;
-}
 #container_form {
-    margin: 0 auto;
     width: 240px;
     height: 40px;
 }
 .container_graph {
-    margin: 0 auto;
     width: 840px;
     height: 70px;
-}
-
-/* Block */
-.block {
-    float: left;
-}
-#block_4_1, #block_4_3 {
-    width: 270px;
-}
-#block_4_2 {
-    width: 378px;
-}
-#block_4_4, #block_4_5 {
-    width: 198px;
-}
-#block_3_4, #block_3_5 {
-    width: 162px;
-}
-#block_4_4_2B, #block_4_5_2B, #block_3_4_1B, #block_3_5_1B,
-#label_4_4_2B, #label_4_5_2B, #label_3_4_1B, #label_3_5_1B {
-    width: 54px;
-}
-#block_4_4_2C, #block_4_5_2C, #block_4_4_2D, #block_4_5_2D,
-#block_3_4_1C, #block_3_5_1C, #block_3_4_1D, #block_3_5_1D,
-#label_4_4_2C, #label_4_5_2C, #label_4_4_2D, #label_4_5_2D,
-#label_3_4_1C, #label_3_5_1C, #label_3_4_1D, #label_3_5_1D {
-    width: 36px;
-}
-#block_4_4_2E, #block_4_5_2E,
-#label_4_4_2E, #label_4_5_2E {
-    width: 18px;
-}
-div[id^=block_4_4_2], div[id^=block_4_5_2] {
-    height: 112px;
-}
-div[id^=block_3_4_1], div[id^=block_3_5_1] {
-    height: 96px;
-}
-
-/* Separator */
-.line {
-    float: left;
-    width: 18px;
-}
-.linenum {
-    float: left;
-    display: block;
-    font-size: 10px;
-    width: 18px;
-    height: 16px;
-    line-height: 16px;
-    color: #BA5656;
-}
-.split {
-    clear: both;
-    width: 900px;
-    height: 16px;
-}
-.label {
-    float: left;
-    font-size: 10px;
-    height: 16px;
-    line-height: 16px;
-    color: red;
-}
-#bouble_4 {
-    float: left;
-    width: 558px;
-    height: 128px;
-}
-#bouble_3 {
-    float: left;
-    width: 504px;
-    height: 112px;
-}
-#bouble_3l {
-    float: left;
-    width: 72px;
-    height: 112px;
-}
-
-/* Row */
-.row {
-    height: 16px;
 }
 
 /* Seat */
@@ -141,6 +40,15 @@ a {
 .seat_forbid {
     color: #404040;
     background: #404040;
+}
+.seat_label {
+    float: left;
+    display: block;
+    font-size: 10px;
+    width: 18px;
+    height: 16px;
+    line-height: 16px;
+    color: #BA5656;
 }
 .seat_type_0 { background: #BAE89B; }
 .seat_type_1 { background: #80AEED; }
