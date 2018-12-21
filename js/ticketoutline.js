@@ -100,7 +100,7 @@ function showData(data){
         }
     }
 
-    var mapCode = getMapCode(data['ticket'], 'div', true, 53, function(item){
+    var mapCode = getMapCode(data['ticket'], 'div', true, nowCategory['mapwidth'], function(item){
         var seat_state = parseInt(item['state']);
         var seat_type = parseInt(item['type']);
         var seat_preserve = parseInt(item['preserve']);
